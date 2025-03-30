@@ -1,7 +1,7 @@
 package com.seplag.processoseletivo.application.usecases.unidade.impl;
 
 import com.seplag.processoseletivo.application.dto.unidade.UnidadeResponseDto;
-import com.seplag.processoseletivo.application.exceptions.UnidadeNotFoundException;
+import com.seplag.processoseletivo.application.exceptions.EntityNotFoundException;
 import com.seplag.processoseletivo.application.usecases.unidade.BuscarUnidadePorIdUseCase;
 import com.seplag.processoseletivo.domain.model.Unidade;
 import com.seplag.processoseletivo.domain.repositories.UnidadeRepository;
@@ -20,7 +20,7 @@ public class BuscarUnidadePorIdUseCaseImpl implements BuscarUnidadePorIdUseCase 
     public UnidadeResponseDto execute(Long id) {
 
         Unidade unidade = repository.buscarPorId(id)
-                .orElseThrow(() -> new UnidadeNotFoundException("Unidade não encontrada"));
+                .orElseThrow(() -> new EntityNotFoundException("Unidade não encontrada"));
 
         return UnidadeResponseDto.of(unidade);
     }
