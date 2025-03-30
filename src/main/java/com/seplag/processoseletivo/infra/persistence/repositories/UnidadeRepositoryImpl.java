@@ -6,7 +6,9 @@ import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
 import com.seplag.processoseletivo.infra.mapper.UnidadeMapper;
 import com.seplag.processoseletivo.infra.persistence.entity.UnidadeEntity;
 import com.seplag.processoseletivo.infra.persistence.repositories.jpa.UnidadeJpaRepository;
+import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UnidadeRepositoryImpl implements UnidadeRepository {
@@ -39,7 +41,14 @@ public class UnidadeRepositoryImpl implements UnidadeRepository {
 
     @Override
     public RespostaPaginada<Unidade> buscaUnidades(int pagina, int tamanho) {
-        return null;
+
+        var respostaPaginada = unidadeRepository.findAll(PageRequest.of(pagina, tamanho));
+        List<Unidade> unidades = respostaPaginada.getContent().stream()
+                .map(UnidadeMapper::toModel)
+                .toList();
+
+        return new RespostaPaginada<>(unidades, respostaPaginada.getNumber(), respostaPaginada.getTotalPages(), respostaPaginada.getTotalElements());
+
     }
 
     @Override
