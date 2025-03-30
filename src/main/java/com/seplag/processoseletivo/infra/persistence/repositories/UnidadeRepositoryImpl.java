@@ -1,0 +1,58 @@
+package com.seplag.processoseletivo.infra.persistence.repositories;
+
+import com.seplag.processoseletivo.domain.model.Unidade;
+import com.seplag.processoseletivo.domain.repositories.UnidadeRepository;
+import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
+import com.seplag.processoseletivo.infra.mapper.UnidadeMapper;
+import com.seplag.processoseletivo.infra.persistence.entity.UnidadeEntity;
+import com.seplag.processoseletivo.infra.persistence.repositories.jpa.UnidadeJpaRepository;
+
+import java.util.Optional;
+
+public class UnidadeRepositoryImpl implements UnidadeRepository {
+
+    UnidadeJpaRepository unidadeRepository;
+
+    public UnidadeRepositoryImpl(UnidadeJpaRepository unidadeRepository) {
+        this.unidadeRepository = unidadeRepository;
+    }
+
+    @Override
+    public Unidade criar(Unidade unidade) {
+
+        UnidadeEntity unidadeEntity = new UnidadeEntity();
+        unidadeEntity.setUnid_nome(unidade.getUnid_nome());
+        unidadeEntity.setUnid_sigla(unidade.getUni_sigla());
+
+        UnidadeEntity unidadeEntitySalva = unidadeRepository.save(unidadeEntity);
+        return UnidadeMapper.toModel(unidadeEntitySalva);
+
+    }
+
+    @Override
+    public Optional<Unidade> buscarPorId(Long id) {
+
+        Optional<UnidadeEntity> unidadeEntity = unidadeRepository.findById(id);
+        return unidadeEntity.map(UnidadeMapper::toModel);
+
+    }
+
+    @Override
+    public RespostaPaginada<Unidade> buscaUnidades(int pagina, int tamanho) {
+        return null;
+    }
+
+    @Override
+    public Unidade atualizar(Unidade unidade) {
+
+        UnidadeEntity unidadeEntity = new UnidadeEntity();
+
+        unidadeEntity.setUnid_id(unidade.getUnid_id());
+        unidadeEntity.setUnid_nome(unidade.getUnid_nome());
+        unidadeEntity.setUnid_sigla(unidade.getUni_sigla());
+
+        UnidadeEntity unidadeEntitySalva = unidadeRepository.save(unidadeEntity);
+        return UnidadeMapper.toModel(unidadeEntitySalva);
+
+    }
+}
