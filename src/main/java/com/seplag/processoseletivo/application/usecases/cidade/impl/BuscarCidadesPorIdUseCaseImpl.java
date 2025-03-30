@@ -19,8 +19,7 @@ public class BuscarCidadesPorIdUseCaseImpl implements BuscarCidadesPorIdUseCase 
     @Override
     public CidadeResponseDto execute(Long id) {
 
-        Cidade cidade = cidadeRepository.buscarPorId(id)
-                .orElseThrow(() -> new EntityNotFoundException("Cidade não encontrada"));
+        Cidade cidade = cidadeRepository.buscarPorId(id);
 
         return CidadeResponseDto.of(cidade);
 

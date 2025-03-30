@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CidadeRepository {
     Cidade criar(Cidade cidade);
-    Optional<Cidade> buscarPorId(Long id);
+    Cidade buscarPorId(Long id);
     RespostaPaginada<Cidade> buscarCidades(int pagina, int tamanho);
     Cidade atualizar(Long id, Cidade cidade);
 

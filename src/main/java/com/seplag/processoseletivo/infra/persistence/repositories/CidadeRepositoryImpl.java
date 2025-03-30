@@ -1,5 +1,6 @@
 package com.seplag.processoseletivo.infra.persistence.repositories;
 
+import com.seplag.processoseletivo.application.exceptions.EntityNotFoundException;
 import com.seplag.processoseletivo.domain.model.Cidade;
 import com.seplag.processoseletivo.domain.repositories.CidadeRepository;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
@@ -32,10 +33,11 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     }
 
     @Override
-    public Optional<Cidade> buscarPorId(Long id) {
+    public Cidade buscarPorId(Long id) {
 
-        Optional<CidadeEntity> cidadeEntity = cidadeJpaRepository.findById(id);
-        return cidadeEntity.map(CidadeMapper::toModel);
+        CidadeEntity cidadeEntity = cidadeJpaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cidade não encontrada"));
+        return CidadeMapper.toModel(cidadeEntity);
 
     }
 

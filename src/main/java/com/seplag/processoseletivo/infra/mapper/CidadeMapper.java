@@ -13,4 +13,12 @@ public class CidadeMapper {
         return cidade;
     }
 
+    public static CidadeEntity toEntity(Cidade cidade) {
+        CidadeEntity entity = new CidadeEntity();
+        entity.setCid_id(cidade.getCid_id());
+        entity.setCid_nome(cidade.getCid_nome());
+        entity.setCid_uf(cidade.getCid_uf());
+        return entity;
+    }
+
 }

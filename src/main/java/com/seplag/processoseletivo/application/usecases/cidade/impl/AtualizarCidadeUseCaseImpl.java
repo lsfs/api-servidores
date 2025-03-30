@@ -32,7 +32,6 @@ public class AtualizarCidadeUseCaseImpl implements AtualizarCidadeUseCase {
 
 
     private Cidade buscaCidade(Long id) {
-        return cidadeRepository.buscarPorId(id)
-                .orElseThrow(() -> new EntityNotFoundException("Cidade não encontrada"));
+        return cidadeRepository.buscarPorId(id);
     }
 }
