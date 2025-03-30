@@ -1,8 +1,10 @@
 package com.seplag.processoseletivo.infra.persistence.repositories;
 
+import com.seplag.processoseletivo.application.exceptions.EntityNotFoundException;
 import com.seplag.processoseletivo.domain.model.Unidade;
 import com.seplag.processoseletivo.domain.repositories.UnidadeRepository;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
+import com.seplag.processoseletivo.infra.mapper.EnderecoMapper;
 import com.seplag.processoseletivo.infra.mapper.UnidadeMapper;
 import com.seplag.processoseletivo.infra.persistence.entity.UnidadeEntity;
 import com.seplag.processoseletivo.infra.persistence.repositories.jpa.UnidadeJpaRepository;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class UnidadeRepositoryImpl implements UnidadeRepository {
 
@@ -25,6 +28,9 @@ public class UnidadeRepositoryImpl implements UnidadeRepository {
         UnidadeEntity unidadeEntity = new UnidadeEntity();
         unidadeEntity.setUnid_nome(unidade.getUnid_nome());
         unidadeEntity.setUnid_sigla(unidade.getUni_sigla());
+        unidadeEntity.setEnderecos(unidade.getEnderecos()
+                .stream().map(EnderecoMapper::toEntity)
+                .collect(Collectors.toSet()));
 
         UnidadeEntity unidadeEntitySalva = unidadeRepository.save(unidadeEntity);
         return UnidadeMapper.toModel(unidadeEntitySalva);
@@ -63,5 +69,14 @@ public class UnidadeRepositoryImpl implements UnidadeRepository {
         UnidadeEntity unidadeEntitySalva = unidadeRepository.save(unidadeEntity);
         return UnidadeMapper.toModel(unidadeEntitySalva);
 
+    }
+
+    @Override
+    public void deletar(Long idUnidade) {
+
+        var unidadeEntity = unidadeRepository.findById(idUnidade)
+                .orElseThrow(() -> new EntityNotFoundException("Unidade não encontrada"));
+
+        unidadeRepository.delete(unidadeEntity);
     }
 }
