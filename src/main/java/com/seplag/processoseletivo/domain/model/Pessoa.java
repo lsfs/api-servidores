@@ -1,5 +1,6 @@
 package com.seplag.processoseletivo.domain.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -7,24 +8,24 @@ public class Pessoa {
 
     private Long pes_id;
     private String pes_nome;
-    private Date pes_data_nascimento;
+    private LocalDate pes_data_nascimento;
     private String pes_sexo;
     private String pes_mae;
     private String pes_pai;
-    private Set<Endereco> enderecos;
+    private Set<Endereco> pes_enderecos;
 
 
     public Pessoa() {
     }
 
-    public Pessoa(Long pes_id, String pes_nome, Date pes_data_nascimento, String pes_sexo, String pes_mae, String pes_pai, Set<Endereco> enderecos) {
+    public Pessoa(Long pes_id, String pes_nome, LocalDate pes_data_nascimento, String pes_sexo, String pes_mae, String pes_pai, Set<Endereco> pes_enderecos) {
         this.pes_id = pes_id;
         this.pes_nome = pes_nome;
         this.pes_data_nascimento = pes_data_nascimento;
         this.pes_sexo = pes_sexo;
         this.pes_mae = pes_mae;
         this.pes_pai = pes_pai;
-        this.enderecos = enderecos;
+        this.pes_enderecos = pes_enderecos;
     }
 
     public Long getPes_id() {
@@ -43,11 +44,11 @@ public class Pessoa {
         this.pes_nome = pes_nome;
     }
 
-    public Date getPes_data_nascimento() {
+    public LocalDate getPes_data_nascimento() {
         return pes_data_nascimento;
     }
 
-    public void setPes_data_nascimento(Date pes_data_nascimento) {
+    public void setPes_data_nascimento(LocalDate pes_data_nascimento) {
         this.pes_data_nascimento = pes_data_nascimento;
     }
 
@@ -76,10 +77,10 @@ public class Pessoa {
     }
 
     public Set<Endereco> getEnderecos() {
-        return enderecos;
+        return pes_enderecos;
     }
 
-    public void setEnderecos(Set<Endereco> enderecos) {
-        this.enderecos = enderecos;
+    public void setEnderecos(Set<Endereco> pes_enderecos) {
+        this.pes_enderecos = pes_enderecos;
     }
 }
