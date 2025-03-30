@@ -1,12 +1,10 @@
 package com.seplag.processoseletivo.application.rest;
 
 
+import com.seplag.processoseletivo.application.dto.shared.MensagemRetorno;
 import com.seplag.processoseletivo.application.dto.unidade.UnidadeRequestDto;
 import com.seplag.processoseletivo.application.dto.unidade.UnidadeResponseDto;
-import com.seplag.processoseletivo.application.usecases.unidade.AtualizarUnidadeUseCase;
-import com.seplag.processoseletivo.application.usecases.unidade.BuscarUnidadePorIdUseCase;
-import com.seplag.processoseletivo.application.usecases.unidade.BuscarUnidadesUseCase;
-import com.seplag.processoseletivo.application.usecases.unidade.CriaUnidadeUseCase;
+import com.seplag.processoseletivo.application.usecases.unidade.*;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +18,14 @@ public class UnidadeController {
     private final BuscarUnidadePorIdUseCase buscarUnidadePorIdUseCase;
     private final AtualizarUnidadeUseCase atualizarUnidadeUseCase;
     private final BuscarUnidadesUseCase buscaUnidades;
+    private final DeletarUnidadeUseCase deletarUnidadeUseCase;
 
-    public UnidadeController(CriaUnidadeUseCase criaUnidadeUseCase, BuscarUnidadePorIdUseCase buscarUnidadePorIdUseCase, AtualizarUnidadeUseCase atualizarUnidadeUseCase, BuscarUnidadesUseCase buscaUnidades) {
+    public UnidadeController(CriaUnidadeUseCase criaUnidadeUseCase, BuscarUnidadePorIdUseCase buscarUnidadePorIdUseCase, AtualizarUnidadeUseCase atualizarUnidadeUseCase, BuscarUnidadesUseCase buscaUnidades, DeletarUnidadeUseCase deletarUnidadeUseCase) {
         this.criaUnidadeUseCase = criaUnidadeUseCase;
         this.buscarUnidadePorIdUseCase = buscarUnidadePorIdUseCase;
         this.atualizarUnidadeUseCase = atualizarUnidadeUseCase;
         this.buscaUnidades = buscaUnidades;
+        this.deletarUnidadeUseCase = deletarUnidadeUseCase;
     }
 
     @PostMapping
@@ -51,6 +51,13 @@ public class UnidadeController {
         var respostaPaginada = buscaUnidades.execute(pagina, tamanho);
 
         return new ResponseEntity<>(respostaPaginada, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<MensagemRetorno> deletarUnidade(@PathVariable Long id) {
+
+        var response = deletarUnidadeUseCase.execute(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
