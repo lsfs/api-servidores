@@ -7,7 +7,7 @@ public class Unidade {
     private Long unid_id;
     private String unid_nome;
     private String unid_sigla;
-    private Set<Endereco> unid_enderecos;
+    private Set<Endereco> enderecos = Set.of();
 
     public Unidade() {
     }
@@ -40,5 +40,21 @@ public class Unidade {
 
     public void setUni_sigla(String unid_sigla) {
         this.unid_sigla = unid_sigla;
+    }
+
+    public String getUnid_sigla() {
+        return unid_sigla;
+    }
+
+    public void setUnid_sigla(String unid_sigla) {
+        this.unid_sigla = unid_sigla;
+    }
+
+    public Set<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(Set<Endereco> unid_enderecos) {
+        this.enderecos = unid_enderecos;
     }
 }

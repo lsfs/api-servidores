@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -26,5 +29,8 @@ public class EnderecoEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cid_id")
     private CidadeEntity cidade;
+
+    @ManyToMany(mappedBy = "enderecos")
+    private Set<UnidadeEntity> unidades = Set.of();
 
 }

@@ -1,5 +1,7 @@
 package com.seplag.processoseletivo.domain.model;
 
+import java.util.Set;
+
 public class Endereco {
 
     private Long end_id;
@@ -8,6 +10,8 @@ public class Endereco {
     private Long end_numero;
     private String end_bairro;
     private Cidade cidade;
+    private Set<Unidade> unidades = Set.of();
+
 
     public Endereco() {
     }
@@ -67,5 +71,13 @@ public class Endereco {
 
     public void setCidade(Cidade cid_id) {
         this.cidade = cid_id;
+    }
+
+    public Set<Unidade> getUnidades() {
+        return unidades;
+    }
+
+    public void setUnidades(Set<Unidade> unidades) {
+        this.unidades = unidades;
     }
 }

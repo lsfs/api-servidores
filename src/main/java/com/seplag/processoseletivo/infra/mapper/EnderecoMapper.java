@@ -12,6 +12,9 @@ public class EnderecoMapper {
         entity.setEnd_numero(endereco.getEnd_numero());
         entity.setEnd_tipo_logradouro(endereco.getEnd_tipo_logradouro());
         entity.setEnd_bairro(endereco.getEnd_bairro());
+        if (endereco.getCidade() != null) {
+            entity.setCidade(CidadeMapper.toEntity(endereco.getCidade()));
+        }
         return entity;
     }
 
