@@ -60,11 +60,10 @@ public class UnidadeRepositoryImpl implements UnidadeRepository {
     @Override
     public Unidade atualizar(Unidade unidade) {
 
-        UnidadeEntity unidadeEntity = new UnidadeEntity();
-
-        unidadeEntity.setUnid_id(unidade.getUnid_id());
-        unidadeEntity.setUnid_nome(unidade.getUnid_nome());
-        unidadeEntity.setUnid_sigla(unidade.getUni_sigla());
+        UnidadeEntity unidadeEntity = UnidadeMapper.toEntity(unidade);
+        unidadeEntity.setEnderecos(unidade.getEnderecos()
+                .stream().map(EnderecoMapper::toEntity)
+                .collect(Collectors.toSet()));
 
         UnidadeEntity unidadeEntitySalva = unidadeRepository.save(unidadeEntity);
         return UnidadeMapper.toModel(unidadeEntitySalva);
