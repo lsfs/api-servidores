@@ -32,6 +32,11 @@ public class ApplicationConfig {
     }
 
     @Bean
+    public ServidorEfetivoRepository servidorEfetivoRepository(ServidorEfetivoJpaRepository servidorEfetivoJpaRepository, PessoaJpaRepository pessoaRepository) {
+        return new ServidorEfetivoRepositoryImpl(servidorEfetivoJpaRepository, pessoaRepository);
+    }
+
+    @Bean
     public PessoaRepository pessoaRepository(PessoaJpaRepository pessoaJpaRepository) {
         return new PessoaRepositoryImpl(pessoaJpaRepository);
     }
