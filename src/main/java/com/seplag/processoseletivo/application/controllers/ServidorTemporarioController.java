@@ -1,10 +1,9 @@
-package com.seplag.processoseletivo.application.rest;
+package com.seplag.processoseletivo.application.controllers;
 
 import com.seplag.processoseletivo.application.dto.servidortemporario.ServidorTempRequestDto;
 import com.seplag.processoseletivo.application.dto.servidortemporario.ServidorTempResponseDto;
 import com.seplag.processoseletivo.application.dto.shared.MensagemRetorno;
 import com.seplag.processoseletivo.application.usecases.servidortemporario.*;
-import com.seplag.processoseletivo.domain.repositories.ServidorTemporarioRepository;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.seplag.processoseletivo.infra.mapper;
+package com.seplag.processoseletivo.infra.persistence.mapper;
 
 import com.seplag.processoseletivo.domain.model.ServidorTemporario;
 import com.seplag.processoseletivo.infra.persistence.entity.ServidorTemporarioEntity;

@@ -1,4 +1,4 @@
-package com.seplag.processoseletivo.application.rest;
+package com.seplag.processoseletivo.application.controllers;
 
 import com.seplag.processoseletivo.application.dto.endereco.EnderecoRequestDto;
 import com.seplag.processoseletivo.application.dto.endereco.EnderecoResponseDto;
