@@ -33,4 +33,7 @@ public class EnderecoEntity {
     @ManyToMany(mappedBy = "enderecos")
     private Set<UnidadeEntity> unidades = Set.of();
 
+    @ManyToMany(mappedBy = "pes_enderecos")
+    private Set<PessoaEntity> pessoas = Set.of();
+
 }

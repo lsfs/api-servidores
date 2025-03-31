@@ -1,15 +1,9 @@
 package com.seplag.processoseletivo.infra.config;
 
 
-import com.seplag.processoseletivo.domain.repositories.CidadeRepository;
-import com.seplag.processoseletivo.domain.repositories.EnderecoRepository;
-import com.seplag.processoseletivo.domain.repositories.UnidadeRepository;
-import com.seplag.processoseletivo.infra.persistence.repositories.CidadeRepositoryImpl;
-import com.seplag.processoseletivo.infra.persistence.repositories.EnderecoRepositoryImpl;
-import com.seplag.processoseletivo.infra.persistence.repositories.UnidadeRepositoryImpl;
-import com.seplag.processoseletivo.infra.persistence.repositories.jpa.CidadeJpaRepository;
-import com.seplag.processoseletivo.infra.persistence.repositories.jpa.EnderecoJpaRepository;
-import com.seplag.processoseletivo.infra.persistence.repositories.jpa.UnidadeJpaRepository;
+import com.seplag.processoseletivo.domain.repositories.*;
+import com.seplag.processoseletivo.infra.persistence.repositories.*;
+import com.seplag.processoseletivo.infra.persistence.repositories.jpa.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,4 +26,13 @@ public class ApplicationConfig {
         return new EnderecoRepositoryImpl(enderecoJpaRepository, cidadeRepository);
     }
 
+    @Bean
+    public ServidorTemporarioRepository servidorTemporarioRepository(ServidorTemporarioJpaRepository servidorTemporarioJpaRepository, PessoaJpaRepository pessoaRepository) {
+        return new ServidorTemporarioRepositoryImpl(servidorTemporarioJpaRepository, pessoaRepository);
+    }
+
+    @Bean
+    public PessoaRepository pessoaRepository(PessoaJpaRepository pessoaJpaRepository) {
+        return new PessoaRepositoryImpl(pessoaJpaRepository);
+    }
 }
