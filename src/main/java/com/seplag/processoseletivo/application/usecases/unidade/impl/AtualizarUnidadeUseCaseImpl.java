@@ -2,7 +2,7 @@ package com.seplag.processoseletivo.application.usecases.unidade.impl;
 
 import com.seplag.processoseletivo.application.dto.unidade.UnidadeRequestDto;
 import com.seplag.processoseletivo.application.dto.unidade.UnidadeResponseDto;
-import com.seplag.processoseletivo.application.exceptions.EntityNotFoundException;
+import com.seplag.processoseletivo.shared.exceptions.EntityNotFoundException;
 import com.seplag.processoseletivo.application.usecases.unidade.AtualizarUnidadeUseCase;
 import com.seplag.processoseletivo.domain.model.Endereco;
 import com.seplag.processoseletivo.domain.model.Unidade;

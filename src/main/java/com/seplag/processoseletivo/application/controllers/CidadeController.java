@@ -1,4 +1,4 @@
-package com.seplag.processoseletivo.application.rest;
+package com.seplag.processoseletivo.application.controllers;
 
 import com.seplag.processoseletivo.application.dto.cidade.CidadeRequestDto;
 import com.seplag.processoseletivo.application.dto.cidade.CidadeResponseDto;

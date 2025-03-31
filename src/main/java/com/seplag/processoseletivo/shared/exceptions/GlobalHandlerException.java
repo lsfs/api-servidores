@@ -1,4 +1,4 @@
-package com.seplag.processoseletivo.application.exceptions;
+package com.seplag.processoseletivo.shared.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

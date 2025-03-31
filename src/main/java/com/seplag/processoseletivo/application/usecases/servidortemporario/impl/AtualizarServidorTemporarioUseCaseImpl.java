@@ -7,7 +7,6 @@ import com.seplag.processoseletivo.domain.model.Endereco;
 import com.seplag.processoseletivo.domain.model.Pessoa;
 import com.seplag.processoseletivo.domain.model.ServidorTemporario;
 import com.seplag.processoseletivo.domain.repositories.EnderecoRepository;
-import com.seplag.processoseletivo.domain.repositories.PessoaRepository;
 import com.seplag.processoseletivo.domain.repositories.ServidorTemporarioRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +18,10 @@ public class AtualizarServidorTemporarioUseCaseImpl implements AtualizarServidor
 
     private final ServidorTemporarioRepository servidorTemporarioRepository;
     private final EnderecoRepository enderecoRepository;
-    private final PessoaRepository pessoaRepository;
 
-    public AtualizarServidorTemporarioUseCaseImpl(ServidorTemporarioRepository servidorTemporarioRepository, EnderecoRepository enderecoRepository, PessoaRepository pessoaRepository) {
+    public AtualizarServidorTemporarioUseCaseImpl(ServidorTemporarioRepository servidorTemporarioRepository, EnderecoRepository enderecoRepository) {
         this.servidorTemporarioRepository = servidorTemporarioRepository;
         this.enderecoRepository = enderecoRepository;
-        this.pessoaRepository = pessoaRepository;
     }
 
     @Override
