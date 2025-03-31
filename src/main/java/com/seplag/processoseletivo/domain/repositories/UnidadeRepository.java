@@ -12,6 +12,5 @@ public interface UnidadeRepository {
     Optional<Unidade> buscarPorId(Long id);
     RespostaPaginada<Unidade> buscaUnidades(int pagina, int tamanho);
     Unidade atualizar(Unidade unidade);
-
-
+    void deletar(Long idUnidade);
 }
