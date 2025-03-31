@@ -1,12 +1,12 @@
 package com.seplag.processoseletivo.infra.persistence.repositories;
 
-import com.seplag.processoseletivo.application.exceptions.EntityNotFoundException;
+import com.seplag.processoseletivo.shared.exceptions.EntityNotFoundException;
 import com.seplag.processoseletivo.domain.model.ServidorEfetivo;
 import com.seplag.processoseletivo.domain.repositories.ServidorEfetivoRepository;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
-import com.seplag.processoseletivo.infra.mapper.EnderecoMapper;
-import com.seplag.processoseletivo.infra.mapper.PessoaMapper;
-import com.seplag.processoseletivo.infra.mapper.ServidorEfetivoMapper;
+import com.seplag.processoseletivo.infra.persistence.mapper.EnderecoMapper;
+import com.seplag.processoseletivo.infra.persistence.mapper.PessoaMapper;
+import com.seplag.processoseletivo.infra.persistence.mapper.ServidorEfetivoMapper;
 import com.seplag.processoseletivo.infra.persistence.entity.EnderecoEntity;
 import com.seplag.processoseletivo.infra.persistence.entity.PessoaEntity;
 import com.seplag.processoseletivo.infra.persistence.entity.ServidorEfetivoEntity;

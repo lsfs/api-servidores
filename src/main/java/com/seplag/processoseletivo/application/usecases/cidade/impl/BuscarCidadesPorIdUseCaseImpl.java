@@ -1,7 +1,6 @@
 package com.seplag.processoseletivo.application.usecases.cidade.impl;
 
 import com.seplag.processoseletivo.application.dto.cidade.CidadeResponseDto;
-import com.seplag.processoseletivo.application.exceptions.EntityNotFoundException;
 import com.seplag.processoseletivo.application.usecases.cidade.BuscarCidadesPorIdUseCase;
 import com.seplag.processoseletivo.domain.model.Cidade;
 import com.seplag.processoseletivo.domain.repositories.CidadeRepository;

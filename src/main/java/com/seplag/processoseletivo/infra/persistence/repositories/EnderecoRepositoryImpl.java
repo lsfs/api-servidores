@@ -1,16 +1,14 @@
 package com.seplag.processoseletivo.infra.persistence.repositories;
 
-import com.seplag.processoseletivo.application.exceptions.EntityNotFoundException;
-import com.seplag.processoseletivo.domain.model.Cidade;
+import com.seplag.processoseletivo.shared.exceptions.EntityNotFoundException;
 import com.seplag.processoseletivo.domain.model.Endereco;
 import com.seplag.processoseletivo.domain.repositories.CidadeRepository;
 import com.seplag.processoseletivo.domain.repositories.EnderecoRepository;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
-import com.seplag.processoseletivo.infra.mapper.CidadeMapper;
-import com.seplag.processoseletivo.infra.mapper.EnderecoMapper;
+import com.seplag.processoseletivo.infra.persistence.mapper.CidadeMapper;
+import com.seplag.processoseletivo.infra.persistence.mapper.EnderecoMapper;
 import com.seplag.processoseletivo.infra.persistence.entity.CidadeEntity;
 import com.seplag.processoseletivo.infra.persistence.entity.EnderecoEntity;
-import com.seplag.processoseletivo.infra.persistence.repositories.jpa.CidadeJpaRepository;
 import com.seplag.processoseletivo.infra.persistence.repositories.jpa.EnderecoJpaRepository;
 import org.springframework.data.domain.PageRequest;
 

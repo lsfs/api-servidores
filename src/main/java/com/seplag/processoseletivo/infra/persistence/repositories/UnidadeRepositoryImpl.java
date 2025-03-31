@@ -1,11 +1,11 @@
 package com.seplag.processoseletivo.infra.persistence.repositories;
 
-import com.seplag.processoseletivo.application.exceptions.EntityNotFoundException;
+import com.seplag.processoseletivo.shared.exceptions.EntityNotFoundException;
 import com.seplag.processoseletivo.domain.model.Unidade;
 import com.seplag.processoseletivo.domain.repositories.UnidadeRepository;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
-import com.seplag.processoseletivo.infra.mapper.EnderecoMapper;
-import com.seplag.processoseletivo.infra.mapper.UnidadeMapper;
+import com.seplag.processoseletivo.infra.persistence.mapper.EnderecoMapper;
+import com.seplag.processoseletivo.infra.persistence.mapper.UnidadeMapper;
 import com.seplag.processoseletivo.infra.persistence.entity.UnidadeEntity;
 import com.seplag.processoseletivo.infra.persistence.repositories.jpa.UnidadeJpaRepository;
 import org.springframework.data.domain.PageRequest;

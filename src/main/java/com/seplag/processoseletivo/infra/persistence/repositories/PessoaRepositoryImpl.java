@@ -1,9 +1,9 @@
 package com.seplag.processoseletivo.infra.persistence.repositories;
 
-import com.seplag.processoseletivo.application.exceptions.EntityNotFoundException;
+import com.seplag.processoseletivo.shared.exceptions.EntityNotFoundException;
 import com.seplag.processoseletivo.domain.model.Pessoa;
 import com.seplag.processoseletivo.domain.repositories.PessoaRepository;
-import com.seplag.processoseletivo.infra.mapper.PessoaMapper;
+import com.seplag.processoseletivo.infra.persistence.mapper.PessoaMapper;
 import com.seplag.processoseletivo.infra.persistence.entity.PessoaEntity;
 import com.seplag.processoseletivo.infra.persistence.repositories.jpa.PessoaJpaRepository;
 
