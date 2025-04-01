@@ -68,13 +68,13 @@ public class ServidorEfetivoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/unidade/{idUnidade}")
+    @GetMapping("/unidade/{unid_id}")
     public ResponseEntity<RespostaPaginada<ServidorEfetivoDetailsResponseDto>> buscarPorUnidade(
-            @PathVariable Long idUnidade,
+            @PathVariable(name = "unid_id") Long unid_id,
             @RequestParam(defaultValue = "0") int pagina,
             @RequestParam(defaultValue = "10") int tamanho
     ) {
-        RespostaPaginada<ServidorEfetivoDetailsResponseDto> resposta = buscarServidorEfetivoPorUnidadeUseCase.execute(idUnidade, pagina, tamanho);
+        RespostaPaginada<ServidorEfetivoDetailsResponseDto> resposta = buscarServidorEfetivoPorUnidadeUseCase.execute(unid_id, pagina, tamanho);
         return new ResponseEntity<>(resposta, HttpStatus.OK);
     }
 
