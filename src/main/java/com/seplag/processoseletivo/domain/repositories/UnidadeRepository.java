@@ -4,6 +4,7 @@ import com.seplag.processoseletivo.domain.model.Unidade;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UnidadeRepository {
@@ -13,4 +14,5 @@ public interface UnidadeRepository {
     RespostaPaginada<Unidade> buscaUnidades(int pagina, int tamanho);
     Unidade atualizar(Unidade unidade);
     void deletar(Long idUnidade);
+    List<Unidade> buscaPorPessoaId(Long pesId);
 }

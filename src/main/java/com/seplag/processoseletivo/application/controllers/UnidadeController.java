@@ -1,6 +1,7 @@
 package com.seplag.processoseletivo.application.controllers;
 
 
+import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoUnidadeEnderecoResponseDto;
 import com.seplag.processoseletivo.application.dto.shared.MensagemRetorno;
 import com.seplag.processoseletivo.application.dto.unidade.UnidadeRequestDto;
 import com.seplag.processoseletivo.application.dto.unidade.UnidadeResponseDto;
@@ -19,13 +20,15 @@ public class UnidadeController {
     private final AtualizarUnidadeUseCase atualizarUnidadeUseCase;
     private final BuscarUnidadesUseCase buscaUnidades;
     private final DeletarUnidadeUseCase deletarUnidadeUseCase;
+    private final BuscarEnderecoDeUnidadePorNomeServidorEfetivoUseCase buscarEnderecoDeUnidadePorNomeServidorEfetivoUseCase;
 
-    public UnidadeController(CriaUnidadeUseCase criaUnidadeUseCase, BuscarUnidadePorIdUseCase buscarUnidadePorIdUseCase, AtualizarUnidadeUseCase atualizarUnidadeUseCase, BuscarUnidadesUseCase buscaUnidades, DeletarUnidadeUseCase deletarUnidadeUseCase) {
+    public UnidadeController(CriaUnidadeUseCase criaUnidadeUseCase, BuscarUnidadePorIdUseCase buscarUnidadePorIdUseCase, AtualizarUnidadeUseCase atualizarUnidadeUseCase, BuscarUnidadesUseCase buscaUnidades, DeletarUnidadeUseCase deletarUnidadeUseCase, BuscarEnderecoDeUnidadePorNomeServidorEfetivoUseCase buscarEnderecoDeUnidadePorNomeServidorEfetivoUseCase) {
         this.criaUnidadeUseCase = criaUnidadeUseCase;
         this.buscarUnidadePorIdUseCase = buscarUnidadePorIdUseCase;
         this.atualizarUnidadeUseCase = atualizarUnidadeUseCase;
         this.buscaUnidades = buscaUnidades;
         this.deletarUnidadeUseCase = deletarUnidadeUseCase;
+        this.buscarEnderecoDeUnidadePorNomeServidorEfetivoUseCase = buscarEnderecoDeUnidadePorNomeServidorEfetivoUseCase;
     }
 
     @PostMapping
@@ -58,6 +61,16 @@ public class UnidadeController {
 
         var response = deletarUnidadeUseCase.execute(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/endereco")
+    public ResponseEntity<RespostaPaginada<ServidorEfetivoUnidadeEnderecoResponseDto>> buscarEnderecoDeUnidadePorNomeServidorEfetivo(
+            @RequestParam String nome,
+            @RequestParam(defaultValue = "0") int pagina,
+            @RequestParam(defaultValue = "10") int tamanho) {
+
+        RespostaPaginada<ServidorEfetivoUnidadeEnderecoResponseDto> resposta = buscarEnderecoDeUnidadePorNomeServidorEfetivoUseCase.execute(nome, pagina, tamanho);
+        return new ResponseEntity<>(resposta, HttpStatus.OK);
     }
 
 

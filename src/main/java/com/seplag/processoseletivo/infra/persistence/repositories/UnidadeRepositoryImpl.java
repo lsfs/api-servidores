@@ -78,4 +78,12 @@ public class UnidadeRepositoryImpl implements UnidadeRepository {
 
         unidadeRepository.delete(unidadeEntity);
     }
+
+    @Override
+    public List<Unidade> buscaPorPessoaId(Long pesId) {
+        return unidadeRepository.buscaPorPessoaId(pesId)
+                .stream()
+                .map(UnidadeMapper::toModel)
+                .collect(Collectors.toList());
+    }
 }

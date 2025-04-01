@@ -11,6 +11,6 @@ public interface ServidorEfetivoRepository {
     RespostaPaginada<ServidorEfetivo> buscaServidores(int pagina, int tamanho);
     void deletar(Long id);
     RespostaPaginada<ServidorEfetivo> listarPorUnidade(Long unid_id, int pagina, int tamanho);
-
+    RespostaPaginada<ServidorEfetivo> buscarPorParteDoNome(String parteNome, int pagina, int tamanho);
 
 }

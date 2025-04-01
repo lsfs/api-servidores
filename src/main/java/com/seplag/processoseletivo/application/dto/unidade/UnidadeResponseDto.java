@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.seplag.processoseletivo.application.dto.endereco.EnderecoResponseDto;
 import com.seplag.processoseletivo.domain.model.Endereco;
 import com.seplag.processoseletivo.domain.model.Unidade;
+import com.seplag.processoseletivo.domain.repositories.UnidadeRepository;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,6 +33,17 @@ public record UnidadeResponseDto (
                 unidade.getUnid_nome(),
                 unidade.getUni_sigla(),
                 null
+        );
+    }
+
+    public static UnidadeResponseDto enderecoDetails(Unidade unidade) {
+        return new UnidadeResponseDto(
+                null,
+                unidade.getUnid_nome(),
+                null,
+                unidade.getEnderecos().stream()
+                        .map(EnderecoResponseDto::of)
+                        .collect(Collectors.toSet())
         );
     }
 
