@@ -107,4 +107,17 @@ public class ServidorEfetivoRepositoryImpl implements ServidorEfetivoRepository 
     public RespostaPaginada<ServidorEfetivo> listarPorUnidade(Long unid_id, int pagina, int tamanho) {
         return null;
     }
+
+    @Override
+    public RespostaPaginada<ServidorEfetivo> buscarPorParteDoNome(String parteNome, int pagina, int tamanho) {
+
+        var respostaPaginada = servidorEfetivoJpaRepository
+                .buscarPorParteDoNome(parteNome, PageRequest.of(pagina, tamanho));
+
+        List<ServidorEfetivo> servidores = respostaPaginada
+                .stream()
+                .map(ServidorEfetivoMapper::toModel)
+                .toList();
+        return new RespostaPaginada<>(servidores, respostaPaginada.getNumber(), respostaPaginada.getTotalPages(), respostaPaginada.getTotalElements());
+    }
 }
