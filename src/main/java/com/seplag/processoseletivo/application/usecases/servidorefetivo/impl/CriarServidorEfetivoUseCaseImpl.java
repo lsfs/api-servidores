@@ -2,6 +2,7 @@ package com.seplag.processoseletivo.application.usecases.servidorefetivo.impl;
 
 import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoRequestDto;
 import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoResponseDto;
+import com.seplag.processoseletivo.application.usecases.fotopessoa.UploadFotoPessoaUseCase;
 import com.seplag.processoseletivo.application.usecases.servidorefetivo.CriarServidorEfetivoUseCase;
 import com.seplag.processoseletivo.domain.model.Endereco;
 import com.seplag.processoseletivo.domain.model.Pessoa;
@@ -9,6 +10,7 @@ import com.seplag.processoseletivo.domain.model.ServidorEfetivo;
 import com.seplag.processoseletivo.domain.repositories.EnderecoRepository;
 import com.seplag.processoseletivo.domain.repositories.ServidorEfetivoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,10 +20,12 @@ public class CriarServidorEfetivoUseCaseImpl implements CriarServidorEfetivoUseC
 
     private final ServidorEfetivoRepository servidorEfetivoRepository;
     private final EnderecoRepository enderecoRepository;
+    private final UploadFotoPessoaUseCase uploadFotoPessoaUseCase;
 
-    public CriarServidorEfetivoUseCaseImpl(ServidorEfetivoRepository servidorEfetivoRepository, EnderecoRepository enderecoRepository) {
+    public CriarServidorEfetivoUseCaseImpl(ServidorEfetivoRepository servidorEfetivoRepository, EnderecoRepository enderecoRepository, UploadFotoPessoaUseCase uploadFotoPessoaUseCase) {
         this.servidorEfetivoRepository = servidorEfetivoRepository;
         this.enderecoRepository = enderecoRepository;
+        this.uploadFotoPessoaUseCase = uploadFotoPessoaUseCase;
     }
 
     @Override

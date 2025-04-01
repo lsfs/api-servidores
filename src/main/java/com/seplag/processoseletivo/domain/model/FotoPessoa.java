@@ -5,17 +5,21 @@ import java.time.LocalDate;
 public class FotoPessoa {
 
     private Long fp_id;
-    private Pessoa pes_id;
+    private Pessoa pessoa;
     private LocalDate fp_data;
     private String fp_bucket;
     private String fp_hash;
 
-    public FotoPessoa() {
+    public FotoPessoa(Pessoa pessoa, String bucket, String hash) {
+        this.pessoa = pessoa;
+        this.fp_data = LocalDate.now();
+        this.fp_bucket = bucket;
+        this.fp_hash = hash;
     }
 
-    public FotoPessoa(Long fp_id, Pessoa pes_id, LocalDate fp_data, String fp_bucket, String fp_hash) {
+    public FotoPessoa(Long fp_id, Pessoa pessoa, LocalDate fp_data, String fp_bucket, String fp_hash) {
         this.fp_id = fp_id;
-        this.pes_id = pes_id;
+        this.pessoa = pessoa;
         this.fp_data = fp_data;
         this.fp_bucket = fp_bucket;
         this.fp_hash = fp_hash;
@@ -29,12 +33,12 @@ public class FotoPessoa {
         this.fp_id = fp_id;
     }
 
-    public Pessoa getPes_id() {
-        return pes_id;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_id(Pessoa pes_id) {
-        this.pes_id = pes_id;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public LocalDate getFp_data() {

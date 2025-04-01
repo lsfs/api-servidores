@@ -2,6 +2,7 @@ package com.seplag.processoseletivo.infra.config;
 
 
 import com.seplag.processoseletivo.domain.repositories.*;
+import com.seplag.processoseletivo.domain.services.FotoStorageService;
 import com.seplag.processoseletivo.infra.persistence.repositories.*;
 import com.seplag.processoseletivo.infra.persistence.repositories.jpa.*;
 import org.springframework.context.annotation.Bean;
@@ -44,5 +45,13 @@ public class ApplicationConfig {
     @Bean
     public LotacaoRepository lotacaoRepository(LotacaoJpaRepository lotacaoJpaRepository) {
         return new LotacaoRepositoryImpl(lotacaoJpaRepository);
+    }
+
+    @Bean
+    public FotoPessoaRepository fotoPessoaRepository(
+            FotoPessoaJpaRepository fotoPessoaJpaRepository,
+            PessoaJpaRepository pessoaJpaRepository
+    ) {
+        return new FotoPessoaRepositoryImpl(fotoPessoaJpaRepository, pessoaJpaRepository);
     }
 }
