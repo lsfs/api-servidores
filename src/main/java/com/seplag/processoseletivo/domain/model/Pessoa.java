@@ -1,6 +1,7 @@
 package com.seplag.processoseletivo.domain.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 import java.util.Set;
 
@@ -82,5 +83,9 @@ public class Pessoa {
 
     public void setEnderecos(Set<Endereco> pes_enderecos) {
         this.pes_enderecos = pes_enderecos;
+    }
+
+    public int getIdade() {
+        return Period.between(this.getPes_data_nascimento(), LocalDate.now()).getYears();
     }
 }

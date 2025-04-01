@@ -10,6 +10,7 @@ public interface LotacaoRepository {
     Lotacao criar(Lotacao lotacao);
     Optional<Lotacao> buscarPorId(Long id);
     RespostaPaginada<Lotacao> buscaLotacoes(int pagina, int tamanho);
+    RespostaPaginada<Lotacao> buscaLotacoesComServidoresEfetivosPorUnidade(Long unidadeId, int pagina, int tamanho);
     Lotacao atualizar(Lotacao lotacao);
 
 }
