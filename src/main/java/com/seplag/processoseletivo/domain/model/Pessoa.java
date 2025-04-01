@@ -19,6 +19,10 @@ public class Pessoa {
     public Pessoa() {
     }
 
+    public Pessoa(Long id) {
+        this.pes_id = id;
+    }
+
     public Pessoa(Long pes_id, String pes_nome, LocalDate pes_data_nascimento, String pes_sexo, String pes_mae, String pes_pai, Set<Endereco> pes_enderecos) {
         this.pes_id = pes_id;
         this.pes_nome = pes_nome;
