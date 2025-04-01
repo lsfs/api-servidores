@@ -1,5 +1,6 @@
 package com.seplag.processoseletivo.application.controllers;
 
+import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoDetailsResponseDto;
 import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoRequestDto;
 import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoResponseDto;
 import com.seplag.processoseletivo.application.usecases.servidorefetivo.*;
@@ -17,14 +18,16 @@ public class ServidorEfetivoController {
     private final BuscarServidoresEfetivosUseCase buscarServidorEfetivosUseCase;
     private final DeletarServidorEfetivoUseCase deletarServidorEfetivoUseCase;
     private final BuscarServidorEfetivoPorIdUseCase buscarServidoresEfetivosUseCase;
+    private final BuscarServidorEfetivoPorUnidadeUseCase buscarServidorEfetivoPorUnidadeUseCase;
 
 
-    public ServidorEfetivoController(CriarServidorEfetivoUseCase criarServidorEfetivoUseCase, AtualizarServidorEfetivoUseCase atualizarServidorEfetivoUseCase, BuscarServidoresEfetivosUseCase buscarServidorEfetivosUseCase, DeletarServidorEfetivoUseCase deletarServidorEfetivoUseCase, BuscarServidorEfetivoPorIdUseCase buscarServidoresEfetivosUseCase) {
+    public ServidorEfetivoController(CriarServidorEfetivoUseCase criarServidorEfetivoUseCase, AtualizarServidorEfetivoUseCase atualizarServidorEfetivoUseCase, BuscarServidoresEfetivosUseCase buscarServidorEfetivosUseCase, DeletarServidorEfetivoUseCase deletarServidorEfetivoUseCase, BuscarServidorEfetivoPorIdUseCase buscarServidoresEfetivosUseCase, BuscarServidorEfetivoPorUnidadeUseCase buscarServidorEfetivoPorUnidadeUseCase) {
         this.criarServidorEfetivoUseCase = criarServidorEfetivoUseCase;
         this.atualizarServidorEfetivoUseCase = atualizarServidorEfetivoUseCase;
         this.buscarServidorEfetivosUseCase = buscarServidorEfetivosUseCase;
         this.deletarServidorEfetivoUseCase = deletarServidorEfetivoUseCase;
         this.buscarServidoresEfetivosUseCase = buscarServidoresEfetivosUseCase;
+        this.buscarServidorEfetivoPorUnidadeUseCase = buscarServidorEfetivoPorUnidadeUseCase;
     }
 
     @PostMapping
@@ -63,6 +66,16 @@ public class ServidorEfetivoController {
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         deletarServidorEfetivoUseCase.execute(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/unidade/{unid_id}")
+    public ResponseEntity<RespostaPaginada<ServidorEfetivoDetailsResponseDto>> buscarPorUnidade(
+            @PathVariable(name = "unid_id") Long unid_id,
+            @RequestParam(defaultValue = "0") int pagina,
+            @RequestParam(defaultValue = "10") int tamanho
+    ) {
+        RespostaPaginada<ServidorEfetivoDetailsResponseDto> resposta = buscarServidorEfetivoPorUnidadeUseCase.execute(unid_id, pagina, tamanho);
+        return new ResponseEntity<>(resposta, HttpStatus.OK);
     }
 
 }

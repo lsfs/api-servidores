@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class LotacaoRepositoryImpl implements LotacaoRepository {
 
@@ -51,6 +52,24 @@ public class LotacaoRepositoryImpl implements LotacaoRepository {
 
         return new RespostaPaginada<>(lotacoes, respostaPaginada.getNumber(), respostaPaginada.getTotalPages(), respostaPaginada.getTotalElements());
 
+    }
+
+    @Override
+    public RespostaPaginada<Lotacao> buscaLotacoesComServidoresEfetivosPorUnidade(Long unidadeId, int pagina, int tamanho) {
+
+        var pageable = PageRequest.of(pagina, tamanho);
+        var result = lotacaoJpaRepository.buscaLotacaoesComServidoresEfetivosPorUnidadeId(unidadeId, pageable);
+
+        List<Lotacao> content = result.getContent().stream()
+                .map(LotacaoMapper::toModel)
+                .collect(Collectors.toList());
+
+        return new RespostaPaginada<>(
+                content,
+                result.getNumber(),
+                result.getTotalPages(),
+                result.getTotalElements()
+        );
     }
 
     @Override
