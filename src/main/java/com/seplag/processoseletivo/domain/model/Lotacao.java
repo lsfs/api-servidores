@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class Lotacao {
 
     private Long lot_id;
-    private Pessoa pes_id;
-    private Unidade uni_id;
+    private Pessoa pessoa;
+    private Unidade unidade;
     private LocalDate lot_data_lotacao;
     private LocalDate lot_data_remocao;
     private String lot_portaria;
@@ -14,10 +14,10 @@ public class Lotacao {
     public Lotacao() {
     }
 
-    public Lotacao(Long lot_id, Pessoa pes_id, Unidade uni_id, LocalDate lot_data_lotacao, LocalDate lot_data_remocao, String lot_portaria) {
+    public Lotacao(Long lot_id, Pessoa pessoa, Unidade unidade, LocalDate lot_data_lotacao, LocalDate lot_data_remocao, String lot_portaria) {
         this.lot_id = lot_id;
-        this.pes_id = pes_id;
-        this.uni_id = uni_id;
+        this.pessoa = pessoa;
+        this.unidade = unidade;
         this.lot_data_lotacao = lot_data_lotacao;
         this.lot_data_remocao = lot_data_remocao;
         this.lot_portaria = lot_portaria;
@@ -31,20 +31,20 @@ public class Lotacao {
         this.lot_id = lot_id;
     }
 
-    public Pessoa getPes_id() {
-        return pes_id;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_id(Pessoa pes_id) {
-        this.pes_id = pes_id;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public Unidade getUni_id() {
-        return uni_id;
+    public Unidade getUnidade() {
+        return unidade;
     }
 
-    public void setUni_id(Unidade uni_id) {
-        this.uni_id = uni_id;
+    public void setUnidade(Unidade unidade) {
+        this.unidade = unidade;
     }
 
     public LocalDate getLot_data_lotacao() {

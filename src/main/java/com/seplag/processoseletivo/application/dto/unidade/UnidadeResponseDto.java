@@ -1,5 +1,6 @@
 package com.seplag.processoseletivo.application.dto.unidade;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.seplag.processoseletivo.application.dto.endereco.EnderecoResponseDto;
 import com.seplag.processoseletivo.domain.model.Endereco;
 import com.seplag.processoseletivo.domain.model.Unidade;
@@ -7,6 +8,7 @@ import com.seplag.processoseletivo.domain.model.Unidade;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public record UnidadeResponseDto (
         Long unid_id,
         String unid_nome,
@@ -23,4 +25,14 @@ public record UnidadeResponseDto (
                         .collect(Collectors.toSet())
         );
     }
+
+    public static UnidadeResponseDto simpleDetailsOf(Unidade unidade) {
+        return new UnidadeResponseDto(
+                unidade.getUnid_id(),
+                unidade.getUnid_nome(),
+                unidade.getUni_sigla(),
+                null
+        );
+    }
+
 }
