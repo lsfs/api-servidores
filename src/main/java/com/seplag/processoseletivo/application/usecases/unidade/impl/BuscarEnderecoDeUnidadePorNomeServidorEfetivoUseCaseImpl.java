@@ -9,13 +9,12 @@ import com.seplag.processoseletivo.domain.model.Unidade;
 import com.seplag.processoseletivo.domain.repositories.ServidorEfetivoRepository;
 import com.seplag.processoseletivo.domain.repositories.UnidadeRepository;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
-import com.seplag.processoseletivo.infra.persistence.mapper.EnderecoMapper;
-import com.seplag.processoseletivo.shared.exceptions.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+
 import java.util.stream.Collectors;
 
 @Service
