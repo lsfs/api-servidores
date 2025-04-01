@@ -1,13 +1,13 @@
 package com.seplag.processoseletivo.application.dto.servidorefetivo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.seplag.processoseletivo.application.dto.unidade.UnidadeResponseDto;
-import com.seplag.processoseletivo.domain.model.ServidorEfetivo;
 
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public record ServidorEfetivoDetailsResponseDto(
         String nome,
         int idade,
-        UnidadeResponseDto unidadeLotacao
+        UnidadeResponseDto unidadeLotacao,
+        String foto
 ) {
-    // You can add additional methods here if needed
 }
