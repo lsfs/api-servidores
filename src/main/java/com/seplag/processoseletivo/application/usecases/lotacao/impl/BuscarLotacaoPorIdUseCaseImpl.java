@@ -1,17 +1,17 @@
 package com.seplag.processoseletivo.application.usecases.lotacao.impl;
 
 import com.seplag.processoseletivo.application.dto.lotacao.LotacaoResponseDto;
-import com.seplag.processoseletivo.application.usecases.lotacao.BuscaLotacaoPorIdUseCase;
+import com.seplag.processoseletivo.application.usecases.lotacao.BuscarLotacaoPorIdUseCase;
 import com.seplag.processoseletivo.domain.model.Lotacao;
 import com.seplag.processoseletivo.domain.repositories.LotacaoRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BuscaLotacaoPorIdUseCaseImpl implements BuscaLotacaoPorIdUseCase {
+public class BuscarLotacaoPorIdUseCaseImpl implements BuscarLotacaoPorIdUseCase {
 
     private final LotacaoRepository lotacaoRepository;
 
-    public BuscaLotacaoPorIdUseCaseImpl(LotacaoRepository lotacaoRepository) {
+    public BuscarLotacaoPorIdUseCaseImpl(LotacaoRepository lotacaoRepository) {
         this.lotacaoRepository = lotacaoRepository;
     }
 

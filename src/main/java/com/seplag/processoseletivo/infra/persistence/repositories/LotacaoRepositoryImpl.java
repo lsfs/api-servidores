@@ -8,7 +8,9 @@ import com.seplag.processoseletivo.infra.persistence.mapper.LotacaoMapper;
 import com.seplag.processoseletivo.infra.persistence.mapper.PessoaMapper;
 import com.seplag.processoseletivo.infra.persistence.mapper.UnidadeMapper;
 import com.seplag.processoseletivo.infra.persistence.repositories.jpa.LotacaoJpaRepository;
+import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
 import java.util.Optional;
 
 public class LotacaoRepositoryImpl implements LotacaoRepository {
@@ -41,7 +43,14 @@ public class LotacaoRepositoryImpl implements LotacaoRepository {
 
     @Override
     public RespostaPaginada<Lotacao> buscaLotacoes(int pagina, int tamanho) {
-        return null;
+
+        var respostaPaginada = lotacaoJpaRepository.findAll(PageRequest.of(pagina, tamanho));
+        List<Lotacao> lotacoes = respostaPaginada.getContent().stream()
+                .map(LotacaoMapper::toModel)
+                .toList();
+
+        return new RespostaPaginada<>(lotacoes, respostaPaginada.getNumber(), respostaPaginada.getTotalPages(), respostaPaginada.getTotalElements());
+
     }
 
     @Override

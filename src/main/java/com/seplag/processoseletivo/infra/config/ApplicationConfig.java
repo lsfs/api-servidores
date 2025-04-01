@@ -40,4 +40,9 @@ public class ApplicationConfig {
     public PessoaRepository pessoaRepository(PessoaJpaRepository pessoaJpaRepository) {
         return new PessoaRepositoryImpl(pessoaJpaRepository);
     }
+
+    @Bean
+    public LotacaoRepository lotacaoRepository(LotacaoJpaRepository lotacaoJpaRepository) {
+        return new LotacaoRepositoryImpl(lotacaoJpaRepository);
+    }
 }
