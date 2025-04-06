@@ -37,3 +37,10 @@ public class AuthController {
     }
 
 }
+
+    @PostMapping("/cadastro")
+    public ResponseEntity<MensagemRetorno> cadastraUsuario(@RequestBody UsuarioRequestDto usuarioRequestDto) {
+        MensagemRetorno response = cadastraUsuarioUseCase.execute(usuarioRequestDto);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+    }

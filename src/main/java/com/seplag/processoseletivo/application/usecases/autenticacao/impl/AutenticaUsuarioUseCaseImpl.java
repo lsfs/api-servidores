@@ -40,7 +40,7 @@ public class AutenticaUsuarioUseCaseImpl implements AutenticaUsuarioUseCase {
         Usuario usuario = usuarioRepository.findByEmail(email);
 
         if(!passwordEncoder.matches(senha, usuario.getSenha())) {
-            throw new AuthenticationException("Senha inválida");
+            throw new AuthenticationException("Informações de autenticação inválidas");
         }
 
         return new LoginResponseDto(

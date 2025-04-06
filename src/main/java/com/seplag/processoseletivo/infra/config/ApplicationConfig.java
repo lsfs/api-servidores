@@ -54,4 +54,9 @@ public class ApplicationConfig {
     ) {
         return new FotoPessoaRepositoryImpl(fotoPessoaJpaRepository, pessoaJpaRepository);
     }
+
+    @Bean
+    public UsuarioRepository usuarioRepository(UsuarioJpaRepository usuarioJpaRepository) {
+        return new UsuarioRepositoryImpl(usuarioJpaRepository);
+    }
 }

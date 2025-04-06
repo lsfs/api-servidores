@@ -8,5 +8,6 @@ public interface UsuarioRepository {
 
     Usuario findByEmail(String email);
     Usuario findById(Long id);
+    Usuario criar(Usuario usuario);
 
 }

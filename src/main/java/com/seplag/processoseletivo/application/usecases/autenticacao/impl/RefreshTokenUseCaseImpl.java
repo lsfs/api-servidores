@@ -8,7 +8,9 @@ import com.seplag.processoseletivo.domain.model.Usuario;
 import com.seplag.processoseletivo.domain.repositories.UsuarioRepository;
 import com.seplag.processoseletivo.infra.security.JwtTokenProvider;
 import com.seplag.processoseletivo.shared.exceptions.AuthenticationException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RefreshTokenUseCaseImpl implements RefreshTokenUseCase {
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -26,13 +28,13 @@ public class RefreshTokenUseCaseImpl implements RefreshTokenUseCase {
     @Override
     public LoginResponseDto execute(String refreshToken) {
 
-        if (!jwtTokenProvider.validadeToken(refreshToken, "refresh")) {
+        if (!jwtTokenProvider.validaToken(refreshToken, "refresh")) {
             throw new AuthenticationException("Token de refresh inválido.");
         }
 
-        String userId = jwtTokenProvider.getUserIdFromToken(refreshToken);
+        String usuarioId = jwtTokenProvider.getUsuarioIdfromToken(refreshToken);
 
-        Usuario usuario = usuarioRepository.findByEmail(userId);
+        Usuario usuario = usuarioRepository.findByEmail(usuarioId);
 
         return new LoginResponseDto(
                 geraTokenUseCase.execute(usuario),
