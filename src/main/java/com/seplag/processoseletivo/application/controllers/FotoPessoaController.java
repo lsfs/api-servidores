@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/foto-pessoa")
 @Tag(name = "FotoPessoa")
@@ -41,11 +43,10 @@ public class FotoPessoaController {
     public ResponseEntity<MensagemRetorno> uploadFoto(
         @Parameter(description = "ID da pessoa", required = true)
         @PathVariable Long pessoaId,
-        @RequestParam("arquivo") MultipartFile arquivo
+        @RequestParam("arquivos") List<MultipartFile> arquivos
     ) {
         Pessoa pessoa = new Pessoa(pessoaId);
-        uploadFotoPessoaUseCase.execute(pessoa, arquivo);
-        System.out.println("Arquivo recebido: " + arquivo.getOriginalFilename());
+        uploadFotoPessoaUseCase.execute(pessoa, arquivos);
         return new ResponseEntity<>(new MensagemRetorno("Arquivo enviado!"), HttpStatus.CREATED);
     }
 
