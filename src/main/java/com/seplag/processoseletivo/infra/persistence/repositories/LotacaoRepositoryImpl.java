@@ -2,12 +2,15 @@ package com.seplag.processoseletivo.infra.persistence.repositories;
 
 import com.seplag.processoseletivo.domain.model.Lotacao;
 import com.seplag.processoseletivo.domain.repositories.LotacaoRepository;
+import com.seplag.processoseletivo.domain.repositories.UnidadeRepository;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
 import com.seplag.processoseletivo.infra.persistence.entity.LotacaoEntity;
 import com.seplag.processoseletivo.infra.persistence.mapper.LotacaoMapper;
 import com.seplag.processoseletivo.infra.persistence.mapper.PessoaMapper;
 import com.seplag.processoseletivo.infra.persistence.mapper.UnidadeMapper;
 import com.seplag.processoseletivo.infra.persistence.repositories.jpa.LotacaoJpaRepository;
+import com.seplag.processoseletivo.infra.persistence.repositories.jpa.UnidadeJpaRepository;
+import com.seplag.processoseletivo.shared.exceptions.EntityNotFoundException;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
@@ -17,9 +20,11 @@ import java.util.stream.Collectors;
 public class LotacaoRepositoryImpl implements LotacaoRepository {
 
     private final LotacaoJpaRepository lotacaoJpaRepository;
+    private final UnidadeJpaRepository unidadeJpaRepository;
 
-    public LotacaoRepositoryImpl(LotacaoJpaRepository lotacaoJpaRepository) {
+    public LotacaoRepositoryImpl(LotacaoJpaRepository lotacaoJpaRepository, UnidadeJpaRepository unidadeJpaRepository) {
         this.lotacaoJpaRepository = lotacaoJpaRepository;
+        this.unidadeJpaRepository = unidadeJpaRepository;
     }
 
     @Override
@@ -58,6 +63,13 @@ public class LotacaoRepositoryImpl implements LotacaoRepository {
     public RespostaPaginada<Lotacao> buscaLotacoesComServidoresEfetivosPorUnidade(Long unidadeId, int pagina, int tamanho) {
 
         var pageable = PageRequest.of(pagina, tamanho);
+
+        var existsUnidade = unidadeJpaRepository.existsById(unidadeId);
+
+        if (!existsUnidade) {
+            throw new EntityNotFoundException("Unidade não encontrada");
+        }
+
         var result = lotacaoJpaRepository.buscaLotacaoesComServidoresEfetivosPorUnidadeId(unidadeId, pageable);
 
         List<Lotacao> content = result.getContent().stream()
