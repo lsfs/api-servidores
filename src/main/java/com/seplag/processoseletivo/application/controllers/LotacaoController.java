@@ -7,12 +7,19 @@ import com.seplag.processoseletivo.application.usecases.lotacao.BuscarLotacaoPor
 import com.seplag.processoseletivo.application.usecases.lotacao.BuscarLotacaoUseCase;
 import com.seplag.processoseletivo.application.usecases.lotacao.CriaLotacaoUseCase;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/lotacoes")
 @RestController
+@Tag(name = "Lotação", description = "Operações relacionadas a lotações")
 public class LotacaoController {
 
     private final CriaLotacaoUseCase criaLotacaoUseCase;
@@ -27,6 +34,12 @@ public class LotacaoController {
         this.buscarLotacaoUseCase = buscarLotacaoUseCase;
     }
 
+    @Operation(summary = "Cria uma nova lotação")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Lotação criada com sucesso",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = LotacaoResponseDto.class))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content)
+    })
     @PostMapping
     public ResponseEntity<LotacaoResponseDto> cria(
             @RequestBody LotacaoRequestDto lotacaoRequestDto
@@ -35,6 +48,12 @@ public class LotacaoController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Busca uma lotação pelo ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lotação encontrada",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = LotacaoResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Lotação não encontrada", content = @Content)
+    })
     @GetMapping("/{id}")
     public ResponseEntity<LotacaoResponseDto> buscaPorId(
             @PathVariable Long id
@@ -43,6 +62,13 @@ public class LotacaoController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Operation(summary = "Atualiza uma lotação pelo ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lotação atualizada com sucesso",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = LotacaoResponseDto.class))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Lotação não encontrada", content = @Content)
+    })
     @PutMapping("/{id}")
     public ResponseEntity<LotacaoResponseDto> atualiza(
             @PathVariable Long id,
@@ -52,6 +78,12 @@ public class LotacaoController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Operation(summary = "Busca todas as lotações com paginação")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lotações encontradas",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = RespostaPaginada.class))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content)
+    })
     @GetMapping
     public ResponseEntity<RespostaPaginada<LotacaoResponseDto>> buscaTodos(
             @RequestParam(value = "pagina", defaultValue = "0") int pagina,
@@ -60,8 +92,4 @@ public class LotacaoController {
         var response = this.buscarLotacaoUseCase.execute(pagina, tamanho);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-
-
-
 }
