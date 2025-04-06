@@ -5,12 +5,19 @@ import com.seplag.processoseletivo.application.dto.servidortemporario.ServidorTe
 import com.seplag.processoseletivo.application.dto.shared.MensagemRetorno;
 import com.seplag.processoseletivo.application.usecases.servidortemporario.*;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/servidor-temporario")
+@Tag(name = "ServidorTemporário", description = "Operações relacionadas a servidores temporários")
 public class ServidorTemporarioController {
 
     private final CriarServidorTempUseCase criarServidorTempUseCase;
@@ -27,6 +34,12 @@ public class ServidorTemporarioController {
         this.deletarServidorTemporarioUseCase = deletarServidorTemporarioUseCase;
     }
 
+    @Operation(summary = "Cria um novo servidor temporário")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Servidor temporário criado com sucesso",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServidorTempResponseDto.class))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content)
+    })
     @PostMapping
     public ResponseEntity<ServidorTempResponseDto> criar(
             @RequestBody ServidorTempRequestDto servidorTempRequestDto
@@ -35,12 +48,24 @@ public class ServidorTemporarioController {
         return new ResponseEntity<>(servidorTempResponseDto, HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Busca um servidor temporário pelo ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Servidor temporário encontrado",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServidorTempResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Servidor temporário não encontrado", content = @Content)
+    })
     @GetMapping("/{id}")
     public ResponseEntity<ServidorTempResponseDto> buscarPorId(@PathVariable Long id) {
         ServidorTempResponseDto servidorTempResponseDto = buscarServidorTempPorIdUseCase.execute(id);
         return new ResponseEntity<>(servidorTempResponseDto, HttpStatus.OK);
     }
 
+    @Operation(summary = "Busca todos os servidores temporários com paginação")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Servidores temporários encontrados",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = RespostaPaginada.class))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content)
+    })
     @GetMapping()
     public ResponseEntity<RespostaPaginada<ServidorTempResponseDto>> buscarServidoresTemporarios(
             @RequestParam(defaultValue = "0") int pagina,
@@ -50,6 +75,13 @@ public class ServidorTemporarioController {
         return new ResponseEntity<>(resposta, HttpStatus.OK);
     }
 
+    @Operation(summary = "Atualiza um servidor temporário pelo ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Servidor temporário atualizado com sucesso",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ServidorTempResponseDto.class))),
+            @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Servidor temporário não encontrado", content = @Content)
+    })
     @PutMapping("/{id}")
     public ResponseEntity<ServidorTempResponseDto> atualizar(
             @PathVariable Long id,
@@ -59,6 +91,11 @@ public class ServidorTemporarioController {
         return new ResponseEntity<>(servidorTempResponseDto, HttpStatus.OK);
     }
 
+    @Operation(summary = "Deleta um servidor temporário pelo ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Servidor temporário deletado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Servidor temporário não encontrado", content = @Content)
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<MensagemRetorno> deletar(@PathVariable Long id) {
         var response = deletarServidorTemporarioUseCase.execute(id);
