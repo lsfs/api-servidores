@@ -8,6 +8,7 @@ import com.seplag.processoseletivo.infra.persistence.mapper.FotoPessoaMapper;
 import com.seplag.processoseletivo.infra.persistence.repositories.jpa.FotoPessoaJpaRepository;
 import com.seplag.processoseletivo.infra.persistence.repositories.jpa.PessoaJpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class FotoPessoaRepositoryImpl implements FotoPessoaRepository {
@@ -34,11 +35,11 @@ public class FotoPessoaRepositoryImpl implements FotoPessoaRepository {
     }
 
     @Override
-    public Optional<FotoPessoa> buscarPorPessoa(Long idPessoa) {
+    public List<FotoPessoa> buscarPorPessoa(Long idPessoa) {
 
         return fotoPessoaJpaRepository.findByPessoaId(idPessoa)
-                .map(FotoPessoaMapper::toDomain);
-
+                .stream().map(FotoPessoaMapper::toDomain)
+                .toList();
 
     }
 

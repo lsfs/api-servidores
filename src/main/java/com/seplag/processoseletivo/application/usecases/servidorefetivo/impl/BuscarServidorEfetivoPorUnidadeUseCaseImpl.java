@@ -1,5 +1,6 @@
 package com.seplag.processoseletivo.application.usecases.servidorefetivo.impl;
 
+import com.seplag.processoseletivo.application.dto.FotoPessoaLinkResponse;
 import com.seplag.processoseletivo.application.dto.lotacao.LotacaoResponseDto;
 import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoDetailsResponseDto;
 import com.seplag.processoseletivo.application.dto.unidade.UnidadeResponseDto;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -43,15 +45,26 @@ public class BuscarServidorEfetivoPorUnidadeUseCaseImpl implements BuscarServido
                 .map(lotacao -> {
                     Pessoa pessoa = lotacao.getPessoa();
                     int idade = pessoa.getIdade();
-                    FotoPessoa fotoPessoa = fotoPessoaRepository.buscarPorPessoa(pessoa.getPes_id()).orElse(null);
+                    List<FotoPessoa> fotoPessoasList = fotoPessoaRepository.buscarPorPessoa(pessoa.getPes_id());
+                    List<FotoPessoaLinkResponse> listaLinks = List.of();
 
-                    String fotoUrl = fotoPessoa != null ? buscaFotoPorIdUseCase.execute(fotoPessoa.getFp_id()) : null;
+                    if (!fotoPessoasList.isEmpty()) {
+                        listaLinks = fotoPessoasList.stream().map(
+                                fotoPessoa -> {
+                                    String fotoUrl = null;
+                                    if (fotoPessoa != null) {
+                                        fotoUrl = buscaFotoPorIdUseCase.execute(fotoPessoa.getFp_id());
+                                    }
+                                    return new FotoPessoaLinkResponse(fotoUrl);
+                                }
+                        ).toList();
+                    }
 
                     return new ServidorEfetivoDetailsResponseDto(
                             lotacao.getPessoa().getPes_nome(),
                             idade,
                             UnidadeResponseDto.simpleDetailsOf(lotacao.getUnidade()),
-                            fotoUrl
+                            listaLinks
                     );
 
                 }).toList();
