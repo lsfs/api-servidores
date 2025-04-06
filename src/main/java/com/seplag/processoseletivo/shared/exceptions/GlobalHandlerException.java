@@ -21,4 +21,13 @@ public class GlobalHandlerException {
                 new ErrorResponse(ex.getMessage(),HttpStatus.BAD_REQUEST.value()),
                 HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ErrorResponse> handleAuthenticationException(AuthenticationException ex) {
+        return new ResponseEntity<>(
+                new ErrorResponse(ex.getMessage(),HttpStatus.UNAUTHORIZED.value()),
+                HttpStatus.UNAUTHORIZED);
+    }
+
+
 }
