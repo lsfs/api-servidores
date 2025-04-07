@@ -5,6 +5,7 @@ import com.seplag.processoseletivo.domain.services.FotoStorageService;
 import io.minio.*;
 import io.minio.http.Method;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -13,7 +14,10 @@ import java.io.InputStream;
 public class MinioStorageService implements FotoStorageService {
 
     private final MinioClient minioClient;
-    private final String bucket = "pessoas";
+
+    @Value("${minio.bucket-name}")
+    private String bucket;
+    private final int EXPIRE_SECONDS = 300;
 
     public MinioStorageService(MinioClient minioClient) {
         this.minioClient = minioClient;
@@ -55,11 +59,11 @@ public class MinioStorageService implements FotoStorageService {
                             .method(Method.GET)
                             .bucket(bucket)
                             .object(nomeArquivo)
-                            .expiry(300)
+                            .expiry(EXPIRE_SECONDS)
                             .build()
             );
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao gerar URL temporária para imagem", e);
+            throw new RuntimeException("Erro ao gerar link temporário para imagem armazenada", e);
         }
     }
 
