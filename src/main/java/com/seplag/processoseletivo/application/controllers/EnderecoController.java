@@ -3,6 +3,7 @@ package com.seplag.processoseletivo.application.controllers;
 import com.seplag.processoseletivo.application.dto.endereco.EnderecoRequestDto;
 import com.seplag.processoseletivo.application.dto.endereco.EnderecoResponseDto;
 import com.seplag.processoseletivo.application.usecases.endereco.AtualizarEnderecoUseCase;
+import com.seplag.processoseletivo.application.usecases.endereco.BuscarEnderecoPorIdUseCase;
 import com.seplag.processoseletivo.application.usecases.endereco.BuscarEnderecosUseCase;
 import com.seplag.processoseletivo.application.usecases.endereco.CriarEnderecoUseCase;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
@@ -27,11 +28,13 @@ public class EnderecoController {
     private final CriarEnderecoUseCase criarEnderecoUseCase;
     private final BuscarEnderecosUseCase buscarEnderecosUseCase;
     private final AtualizarEnderecoUseCase atualizarEnderecoUseCase;
+    private final BuscarEnderecoPorIdUseCase buscarEnderecoPorIdUseCase;
 
-    public EnderecoController(CriarEnderecoUseCase criarEnderecoUseCase, BuscarEnderecosUseCase buscarEnderecosUseCase, AtualizarEnderecoUseCase atualizarEnderecoUseCase) {
+    public EnderecoController(CriarEnderecoUseCase criarEnderecoUseCase, BuscarEnderecosUseCase buscarEnderecosUseCase, AtualizarEnderecoUseCase atualizarEnderecoUseCase, BuscarEnderecoPorIdUseCase buscarEnderecoPorIdUseCase) {
         this.criarEnderecoUseCase = criarEnderecoUseCase;
         this.buscarEnderecosUseCase = buscarEnderecosUseCase;
         this.atualizarEnderecoUseCase = atualizarEnderecoUseCase;
+        this.buscarEnderecoPorIdUseCase = buscarEnderecoPorIdUseCase;
     }
 
     @Operation(summary = "Cria um novo endereço")
@@ -79,5 +82,18 @@ public class EnderecoController {
         return new ResponseEntity<>(enderecoResponseDto, HttpStatus.OK);
     }
 
-    //:TODO implementar get by id endereço
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Busca um endereço pelo ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Endereço encontrado",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = EnderecoResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "Endereço não encontrado", content = @Content)
+    })
+    public ResponseEntity<EnderecoResponseDto> buscarPorId(
+            @PathVariable Long id
+    ) {
+        EnderecoResponseDto enderecoResponseDto = buscarEnderecoPorIdUseCase.execute(id);
+        return new ResponseEntity<>(enderecoResponseDto, HttpStatus.OK);
+    }
 }
