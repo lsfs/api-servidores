@@ -2,42 +2,31 @@ package com.seplag.processoseletivo.application.dto.endereco;
 
 import com.seplag.processoseletivo.domain.model.Endereco;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Schema(description = "DTO para requisição de endereço")
 public record EnderecoRequestDto(
         @Schema(description = "Tipo de logradouro", example = "Rua", required = true)
+        @NotBlank(message = "O tipo de logradouro não pode ser vazio.")
         String end_tipo_logradouro,
 
         @Schema(description = "Logradouro", example = "Avenida Paulista", required = true)
+        @NotBlank(message = "O logradouro não pode ser nulo ou vazio.")
         String end_logradouro,
 
         @Schema(description = "Número", example = "123", required = true)
+        @NotNull(message = "O número não pode ser nulo ou vazio.")
         Long end_numero,
 
         @Schema(description = "Bairro", example = "Centro", required = true)
+        @NotBlank(message = "O bairro não pode ser nulo ou vazio.")
         String end_bairro,
 
         @Schema(description = "ID da cidade", example = "1", required = true)
+        @NotNull(message = "O ID da cidade não pode ser nulo ou vazio.")
         Long cidade_id
 ) {
-    public EnderecoRequestDto {
-        if (end_tipo_logradouro == null || end_tipo_logradouro.isBlank()) {
-            throw new IllegalArgumentException("Tipo de logradouro não pode ser nulo ou vazio");
-        }
-        if (end_logradouro == null || end_logradouro.isBlank()) {
-            throw new IllegalArgumentException("Logradouro não pode ser nulo ou vazio");
-        }
-        if (end_numero <= 0) {
-            throw new IllegalArgumentException("Número deve ser maior que zero");
-        }
-        if (end_bairro == null || end_bairro.isBlank()) {
-            throw new IllegalArgumentException("Bairro não pode ser nulo ou vazio");
-        }
-        if (cidade_id == null) {
-            throw new IllegalArgumentException("ID da cidade não pode ser nulo");
-        }
-    }
-
     public Endereco fromDto(EnderecoRequestDto enderecoRequestDto) {
         Endereco endereco = new Endereco();
         endereco.setEnd_tipo_logradouro(enderecoRequestDto.end_tipo_logradouro());

@@ -13,13 +13,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/cidades")
 @Tag(name = "Cidade")
+@Validated
 public class CidadeController {
 
     private final CriarCidadeUseCase criarCidadeUseCase;
@@ -42,7 +45,7 @@ public class CidadeController {
     })
     @PostMapping
     public ResponseEntity<CidadeResponseDto> criarCidade(
-            @RequestBody CidadeRequestDto cidadeRequestDto
+            @Valid @RequestBody CidadeRequestDto cidadeRequestDto
     ) {
         var response = this.criarCidadeUseCase.execute(cidadeRequestDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -87,7 +90,7 @@ public class CidadeController {
     @PutMapping("/{id}")
     public ResponseEntity<CidadeResponseDto> atualizarCidade(
             @PathVariable Long id,
-            @RequestBody CidadeRequestDto cidadeRequestDto
+            @Valid @RequestBody CidadeRequestDto cidadeRequestDto
     ) {
         var response = this.atualizarCidadeUseCase.execute(id, cidadeRequestDto);
         return new ResponseEntity<>(response, HttpStatus.OK);

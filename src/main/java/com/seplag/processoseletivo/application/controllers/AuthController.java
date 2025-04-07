@@ -13,13 +13,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 @Tag(name = "Autenticação")
+@Validated
 public class AuthController {
 
     private final AutenticaUsuarioUseCase autenticaUsuarioUseCase;
@@ -39,7 +42,7 @@ public class AuthController {
             @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content)
     })
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
+    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto loginRequestDto) {
         LoginResponseDto response = autenticaUsuarioUseCase.execute(loginRequestDto);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -63,7 +66,7 @@ public class AuthController {
             @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content)
     })
     @PostMapping("/cadastro")
-    public ResponseEntity<MensagemRetorno> cadastraUsuario(@RequestBody UsuarioRequestDto usuarioRequestDto) {
+    public ResponseEntity<MensagemRetorno> cadastraUsuario(@Valid @RequestBody UsuarioRequestDto usuarioRequestDto) {
         MensagemRetorno response = cadastraUsuarioUseCase.execute(usuarioRequestDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

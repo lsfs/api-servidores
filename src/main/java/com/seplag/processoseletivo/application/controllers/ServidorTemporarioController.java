@@ -11,13 +11,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/servidor-temporario")
 @Tag(name = "ServidorTemporário", description = "Operações relacionadas a servidores temporários")
+@Validated
 public class ServidorTemporarioController {
 
     private final CriarServidorTempUseCase criarServidorTempUseCase;
@@ -42,7 +45,7 @@ public class ServidorTemporarioController {
     })
     @PostMapping
     public ResponseEntity<ServidorTempResponseDto> criar(
-            @RequestBody ServidorTempRequestDto servidorTempRequestDto
+            @Valid @RequestBody ServidorTempRequestDto servidorTempRequestDto
     ) {
         ServidorTempResponseDto servidorTempResponseDto = criarServidorTempUseCase.execute(servidorTempRequestDto);
         return new ResponseEntity<>(servidorTempResponseDto, HttpStatus.CREATED);
@@ -85,7 +88,7 @@ public class ServidorTemporarioController {
     @PutMapping("/{id}")
     public ResponseEntity<ServidorTempResponseDto> atualizar(
             @PathVariable Long id,
-            @RequestBody ServidorTempRequestDto servidorTempRequestDto
+            @Valid @RequestBody ServidorTempRequestDto servidorTempRequestDto
     ) {
         ServidorTempResponseDto servidorTempResponseDto = atualizarServidorTemporarioUseCase.execute(id, servidorTempRequestDto);
         return new ResponseEntity<>(servidorTempResponseDto, HttpStatus.OK);

@@ -12,13 +12,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/enderecos")
 @Tag(name = "Endereço")
+@Validated
 public class EnderecoController {
 
     private final CriarEnderecoUseCase criarEnderecoUseCase;
@@ -39,7 +42,7 @@ public class EnderecoController {
     })
     @PostMapping
     public ResponseEntity<EnderecoResponseDto> criar(
-            @RequestBody EnderecoRequestDto enderecoRequestDto
+            @Valid @RequestBody EnderecoRequestDto enderecoRequestDto
     ) {
         EnderecoResponseDto enderecoResponseDto = criarEnderecoUseCase.execute(enderecoRequestDto);
         return new ResponseEntity<>(enderecoResponseDto, HttpStatus.CREATED);
@@ -70,9 +73,11 @@ public class EnderecoController {
     @PutMapping("/{id}")
     public ResponseEntity<EnderecoResponseDto> atualizar(
             @PathVariable Long id,
-            @RequestBody EnderecoRequestDto enderecoRequestDto
+            @Valid @RequestBody EnderecoRequestDto enderecoRequestDto
     ) {
         EnderecoResponseDto enderecoResponseDto = atualizarEnderecoUseCase.execute(id, enderecoRequestDto);
         return new ResponseEntity<>(enderecoResponseDto, HttpStatus.OK);
     }
+
+    //:TODO implementar get by id endereço
 }

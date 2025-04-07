@@ -13,13 +13,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/unidades")
 @Tag(name = "Unidade", description = "Operações relacionadas a unidades")
+@Validated
 public class UnidadeController {
 
     private final CriaUnidadeUseCase criaUnidadeUseCase;
@@ -45,7 +48,7 @@ public class UnidadeController {
             @ApiResponse(responseCode = "400", description = "Argumento inválido", content = @Content)
     })
     @PostMapping
-    public ResponseEntity<UnidadeResponseDto> criarUnidade(@RequestBody UnidadeRequestDto unidadeRequestDto) {
+    public ResponseEntity<UnidadeResponseDto> criarUnidade(@Valid @RequestBody UnidadeRequestDto unidadeRequestDto) {
         return new ResponseEntity<>(criaUnidadeUseCase.execute(unidadeRequestDto), HttpStatus.CREATED);
     }
 
@@ -68,7 +71,7 @@ public class UnidadeController {
             @ApiResponse(responseCode = "404", description = "Unidade não encontrada", content = @Content)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<UnidadeResponseDto> atualizarUnidade(@PathVariable Long id, @RequestBody UnidadeRequestDto unidadeRequestDto) {
+    public ResponseEntity<UnidadeResponseDto> atualizarUnidade(@PathVariable Long id, @Valid @RequestBody UnidadeRequestDto unidadeRequestDto) {
         return new ResponseEntity<>(atualizarUnidadeUseCase.execute(id, unidadeRequestDto), HttpStatus.OK);
     }
 

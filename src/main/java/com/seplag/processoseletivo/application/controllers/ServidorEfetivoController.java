@@ -11,13 +11,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/servidor-efetivo")
 @Tag(name = "ServidorEfetivo", description = "Operações relacionadas a servidores efetivos")
+@Validated
 public class ServidorEfetivoController {
 
     private final CriarServidorEfetivoUseCase criarServidorEfetivoUseCase;
@@ -45,7 +48,7 @@ public class ServidorEfetivoController {
     })
     @PostMapping
     public ResponseEntity<ServidorEfetivoResponseDto> criar(
-            @RequestBody ServidorEfetivoRequestDto servidorEfetivoRequestDto
+            @Valid @RequestBody ServidorEfetivoRequestDto servidorEfetivoRequestDto
     ) {
         ServidorEfetivoResponseDto servidorEfetivoResponseDto = criarServidorEfetivoUseCase.execute(servidorEfetivoRequestDto);
         return new ResponseEntity<>(servidorEfetivoResponseDto, HttpStatus.CREATED);
@@ -88,7 +91,7 @@ public class ServidorEfetivoController {
     @PutMapping("/{id}")
     public ResponseEntity<ServidorEfetivoResponseDto> atualizar(
             @PathVariable Long id,
-            @RequestBody ServidorEfetivoRequestDto servidorEfetivoRequestDto
+            @Valid @RequestBody ServidorEfetivoRequestDto servidorEfetivoRequestDto
     ) {
         ServidorEfetivoResponseDto servidorEfetivoResponseDto = atualizarServidorEfetivoUseCase.execute(id, servidorEfetivoRequestDto);
         return new ResponseEntity<>(servidorEfetivoResponseDto, HttpStatus.OK);
