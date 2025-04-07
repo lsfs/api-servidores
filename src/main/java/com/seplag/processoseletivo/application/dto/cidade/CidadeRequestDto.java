@@ -2,6 +2,7 @@ package com.seplag.processoseletivo.application.dto.cidade;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Schema(description = "DTO para requisição de cidade")
 public record CidadeRequestDto(
@@ -11,6 +12,7 @@ public record CidadeRequestDto(
 
         @Schema(description = "UF da cidade", example = "MT", required = true)
         @NotBlank(message = "A UF da cidade não pode ser nula ou vazia.")
+        @Size(min = 2, max = 2, message = "A UF da cidade deve ter exatamente 2 caracteres.")
         String cid_uf
 ) {
 }

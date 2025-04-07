@@ -15,4 +15,6 @@ public interface UnidadeJpaRepository extends JpaRepository<UnidadeEntity, Long>
             "WHERE l.pessoa.pes_id = :pesId")
     List<UnidadeEntity> buscaPorPessoaId(Long pesId);
 
+    boolean existsById(Long id);
+
 }

@@ -1,7 +1,6 @@
 package com.seplag.processoseletivo.application.usecases.servidorefetivo.impl;
 
-import com.seplag.processoseletivo.application.dto.FotoPessoaLinkResponse;
-import com.seplag.processoseletivo.application.dto.lotacao.LotacaoResponseDto;
+import com.seplag.processoseletivo.application.dto.fotopessoa.FotoPessoaLinkResponse;
 import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoDetailsResponseDto;
 import com.seplag.processoseletivo.application.dto.unidade.UnidadeResponseDto;
 import com.seplag.processoseletivo.application.usecases.fotopessoa.BuscaFotoPorIdUseCase;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Objects;
 
 
 @Service

@@ -1,6 +1,6 @@
 package com.seplag.processoseletivo.application.controllers;
 
-import com.seplag.processoseletivo.application.dto.FotoPessoaLinkResponse;
+import com.seplag.processoseletivo.application.dto.fotopessoa.FotoPessoaLinkResponse;
 import com.seplag.processoseletivo.application.dto.shared.MensagemRetorno;
 import com.seplag.processoseletivo.application.usecases.fotopessoa.BuscaFotoPorIdUseCase;
 import com.seplag.processoseletivo.application.usecases.fotopessoa.UploadFotoPessoaUseCase;
@@ -62,10 +62,5 @@ public class FotoPessoaController {
         return new ResponseEntity<>(new FotoPessoaLinkResponse(response), HttpStatus.OK);
     }
 
-
-    // :TODO : Retorno de unidade na busca por serviodores se nula
-    // :TODO : Retorno de 404 na busca por foto de id nao existente
-    // :TODO : Ordencao por id
-    // :TODO: verificar dto de request de endereços (id cidade)
 
 }

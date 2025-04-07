@@ -43,8 +43,8 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public LotacaoRepository lotacaoRepository(LotacaoJpaRepository lotacaoJpaRepository) {
-        return new LotacaoRepositoryImpl(lotacaoJpaRepository);
+    public LotacaoRepository lotacaoRepository(LotacaoJpaRepository lotacaoJpaRepository, UnidadeJpaRepository unidadeJpaRepository) {
+        return new LotacaoRepositoryImpl(lotacaoJpaRepository, unidadeJpaRepository);
     }
 
     @Bean
