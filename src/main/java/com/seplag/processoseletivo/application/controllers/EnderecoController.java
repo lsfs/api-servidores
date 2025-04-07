@@ -1,6 +1,7 @@
 package com.seplag.processoseletivo.application.controllers;
 
 import com.seplag.processoseletivo.application.dto.endereco.EnderecoRequestDto;
+import com.seplag.processoseletivo.application.dto.endereco.EnderecoRequestUpdateDto;
 import com.seplag.processoseletivo.application.dto.endereco.EnderecoResponseDto;
 import com.seplag.processoseletivo.application.usecases.endereco.AtualizarEnderecoUseCase;
 import com.seplag.processoseletivo.application.usecases.endereco.BuscarEnderecoPorIdUseCase;
@@ -76,7 +77,7 @@ public class EnderecoController {
     @PutMapping("/{id}")
     public ResponseEntity<EnderecoResponseDto> atualizar(
             @PathVariable Long id,
-            @Valid @RequestBody EnderecoRequestDto enderecoRequestDto
+            @Valid @RequestBody EnderecoRequestUpdateDto enderecoRequestDto
     ) {
         EnderecoResponseDto enderecoResponseDto = atualizarEnderecoUseCase.execute(id, enderecoRequestDto);
         return new ResponseEntity<>(enderecoResponseDto, HttpStatus.OK);

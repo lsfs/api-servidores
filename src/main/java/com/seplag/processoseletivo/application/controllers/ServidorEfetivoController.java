@@ -2,6 +2,7 @@ package com.seplag.processoseletivo.application.controllers;
 
 import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoDetailsResponseDto;
 import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoRequestDto;
+import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoRequestUpdateDto;
 import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoResponseDto;
 import com.seplag.processoseletivo.application.usecases.servidorefetivo.*;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
@@ -91,7 +92,7 @@ public class ServidorEfetivoController {
     @PutMapping("/{id}")
     public ResponseEntity<ServidorEfetivoResponseDto> atualizar(
             @PathVariable Long id,
-            @Valid @RequestBody ServidorEfetivoRequestDto servidorEfetivoRequestDto
+            @Valid @RequestBody ServidorEfetivoRequestUpdateDto servidorEfetivoRequestDto
     ) {
         ServidorEfetivoResponseDto servidorEfetivoResponseDto = atualizarServidorEfetivoUseCase.execute(id, servidorEfetivoRequestDto);
         return new ResponseEntity<>(servidorEfetivoResponseDto, HttpStatus.OK);

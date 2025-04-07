@@ -1,7 +1,7 @@
 package com.seplag.processoseletivo.application.usecases.servidortemporario.impl;
 
-import com.seplag.processoseletivo.application.dto.servidortemporario.ServidorTempRequestDto;
 import com.seplag.processoseletivo.application.dto.servidortemporario.ServidorTempResponseDto;
+import com.seplag.processoseletivo.application.dto.servidortemporario.ServidorTemporarioRequestUpdateDto;
 import com.seplag.processoseletivo.application.usecases.servidortemporario.AtualizarServidorTemporarioUseCase;
 import com.seplag.processoseletivo.domain.model.Endereco;
 import com.seplag.processoseletivo.domain.model.Pessoa;
@@ -25,7 +25,7 @@ public class AtualizarServidorTemporarioUseCaseImpl implements AtualizarServidor
     }
 
     @Override
-    public ServidorTempResponseDto execute(Long id, ServidorTempRequestDto servidorTempRequestDto) {
+    public ServidorTempResponseDto execute(Long id, ServidorTemporarioRequestUpdateDto servidorTempRequestDto) {
 
         ServidorTemporario servidorTemporario = buscarServidorTemporarioPorId(id);
 

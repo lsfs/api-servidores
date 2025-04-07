@@ -1,6 +1,6 @@
 package com.seplag.processoseletivo.application.usecases.servidorefetivo.impl;
 
-import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoRequestDto;
+import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoRequestUpdateDto;
 import com.seplag.processoseletivo.application.dto.servidorefetivo.ServidorEfetivoResponseDto;
 import com.seplag.processoseletivo.application.usecases.servidorefetivo.AtualizarServidorEfetivoUseCase;
 import com.seplag.processoseletivo.domain.model.Endereco;
@@ -25,7 +25,7 @@ public class AtualizaServidorEfetivoUseCaseImpl implements AtualizarServidorEfet
     }
 
     @Override
-    public ServidorEfetivoResponseDto execute(Long id, ServidorEfetivoRequestDto servidorEfetivoRequestDto) {
+    public ServidorEfetivoResponseDto execute(Long id, ServidorEfetivoRequestUpdateDto servidorEfetivoRequestDto) {
 
         ServidorEfetivo servidorEfetivo = buscarServidorEfetivoPorId(id);
 

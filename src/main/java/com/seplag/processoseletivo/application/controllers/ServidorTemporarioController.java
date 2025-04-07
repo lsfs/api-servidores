@@ -2,6 +2,7 @@ package com.seplag.processoseletivo.application.controllers;
 
 import com.seplag.processoseletivo.application.dto.servidortemporario.ServidorTempRequestDto;
 import com.seplag.processoseletivo.application.dto.servidortemporario.ServidorTempResponseDto;
+import com.seplag.processoseletivo.application.dto.servidortemporario.ServidorTemporarioRequestUpdateDto;
 import com.seplag.processoseletivo.application.dto.shared.MensagemRetorno;
 import com.seplag.processoseletivo.application.usecases.servidortemporario.*;
 import com.seplag.processoseletivo.domain.utils.RespostaPaginada;
@@ -88,7 +89,7 @@ public class ServidorTemporarioController {
     @PutMapping("/{id}")
     public ResponseEntity<ServidorTempResponseDto> atualizar(
             @PathVariable Long id,
-            @Valid @RequestBody ServidorTempRequestDto servidorTempRequestDto
+            @Valid @RequestBody ServidorTemporarioRequestUpdateDto servidorTempRequestDto
     ) {
         ServidorTempResponseDto servidorTempResponseDto = atualizarServidorTemporarioUseCase.execute(id, servidorTempRequestDto);
         return new ResponseEntity<>(servidorTempResponseDto, HttpStatus.OK);

@@ -65,5 +65,20 @@ public class CidadeRepositoryImpl implements CidadeRepository {
         return CidadeMapper.toModel(cidadeSalva);
     }
 
+    @Override
+    public Cidade buscarOuCriar(String cidade, String uf) {
+
+        CidadeEntity cidadeEntity = cidadeJpaRepository.findByCidNomeAndCidUf(cidade, uf)
+                .orElseGet(() -> {
+                    CidadeEntity novaCidade = new CidadeEntity();
+                    novaCidade.setCid_nome(cidade);
+                    novaCidade.setCid_uf(uf);
+                    return cidadeJpaRepository.save(novaCidade);
+                });
+
+        return CidadeMapper.toModel(cidadeEntity);
+
+    }
+
 
 }

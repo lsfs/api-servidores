@@ -33,7 +33,7 @@ public class CriarEnderecoUseCaseImpl implements CriarEnderecoUseCase {
                 dto.end_logradouro(),
                 dto.end_numero(),
                 dto.end_bairro(),
-                buscaCidade(dto.cidade_id())
+                buscaOuCriaCidade(dto.cidade(), dto.estado())
         );
 
         Endereco enderecoCriado = enderecoRepository.criar(endereco);
@@ -42,8 +42,8 @@ public class CriarEnderecoUseCaseImpl implements CriarEnderecoUseCase {
     }
 
 
-    private Cidade buscaCidade(Long id) {
-       return cidadeRepository.buscarPorId(id);
+    private Cidade buscaOuCriaCidade(String cidade, String estado) {
+       return cidadeRepository.buscarOuCriar(cidade, estado);
     }
 
 

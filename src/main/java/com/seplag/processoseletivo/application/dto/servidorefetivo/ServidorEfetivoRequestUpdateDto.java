@@ -1,9 +1,7 @@
 package com.seplag.processoseletivo.application.dto.servidorefetivo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.seplag.processoseletivo.application.dto.endereco.EnderecoRequestDto;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +10,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Schema(description = "DTO para requisição de servidor efetivo")
-public record ServidorEfetivoRequestDto (
+public record ServidorEfetivoRequestUpdateDto (
         @Schema(description = "Nome do servidor efetivo", example = "João Silva", required = true)
         @NotBlank(message = "O nome do servidor efetivo não pode ser nulo ou vazio.")
         String servidorEfetivoNome,
@@ -40,6 +38,6 @@ public record ServidorEfetivoRequestDto (
 
         @Schema(description = "Endereços do servidor efetivo", required = true)
         @NotEmpty(message = "Pelo menos um endereço deve ser informado.")
-        Set<@Valid EnderecoRequestDto> servidorEfetivoEnderecos
+        Set<Long> servidorEfetivoEnderecos
 ) {
 }

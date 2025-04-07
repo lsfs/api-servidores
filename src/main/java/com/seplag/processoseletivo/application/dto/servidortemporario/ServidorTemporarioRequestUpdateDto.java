@@ -2,9 +2,7 @@ package com.seplag.processoseletivo.application.dto.servidortemporario;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.seplag.processoseletivo.application.dto.endereco.EnderecoRequestDto;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -15,7 +13,7 @@ import java.util.Set;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Schema(description = "DTO para requisição de servidor temporário")
-public record ServidorTempRequestDto(
+public record ServidorTemporarioRequestUpdateDto(
         @Schema(description = "Nome do servidor temporário", example = "João Silva", required = true)
         @NotBlank(message = "O nome do servidor temporário não pode ser nulo ou vazio.")
         String servidorTempNome,
@@ -49,6 +47,6 @@ public record ServidorTempRequestDto(
 
         @Schema(description = "Endereços do servidor temporário", required = true)
         @NotEmpty(message = "Pelo menos um endereço deve ser informado.")
-        Set<@Valid EnderecoRequestDto> servidorTempEnderecos
+        Set<Long> servidorTempEnderecos
 ) {
 }

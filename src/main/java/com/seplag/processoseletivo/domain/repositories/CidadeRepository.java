@@ -10,5 +10,6 @@ public interface CidadeRepository {
     Cidade buscarPorId(Long id);
     RespostaPaginada<Cidade> buscarCidades(int pagina, int tamanho);
     Cidade atualizar(Long id, Cidade cidade);
+    Cidade buscarOuCriar(String cidade, String uf);
 
 }

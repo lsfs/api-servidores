@@ -1,6 +1,7 @@
 package com.seplag.processoseletivo.application.usecases.endereco.impl;
 
 import com.seplag.processoseletivo.application.dto.endereco.EnderecoRequestDto;
+import com.seplag.processoseletivo.application.dto.endereco.EnderecoRequestUpdateDto;
 import com.seplag.processoseletivo.application.dto.endereco.EnderecoResponseDto;
 import com.seplag.processoseletivo.application.usecases.endereco.AtualizarEnderecoUseCase;
 import com.seplag.processoseletivo.domain.model.Cidade;
@@ -21,7 +22,7 @@ public class AtualizarEnderecoUseCaseImpl implements AtualizarEnderecoUseCase {
     }
 
     @Override
-    public EnderecoResponseDto execute(Long id, EnderecoRequestDto enderecoRequestDto) {
+    public EnderecoResponseDto execute(Long id, EnderecoRequestUpdateDto enderecoRequestDto) {
 
         Endereco endereco = buscarEnderecoPorId(id);
         endereco.setEnd_tipo_logradouro(enderecoRequestDto.end_tipo_logradouro());
