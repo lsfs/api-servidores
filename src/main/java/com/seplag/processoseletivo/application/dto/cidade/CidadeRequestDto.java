@@ -1,7 +1,13 @@
 package com.seplag.processoseletivo.application.dto.cidade;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "DTO para requisição de cidade")
 public record CidadeRequestDto(
+        @Schema(description = "Nome da cidade", example = "Cuiabá", required = true)
         String cid_nome,
+
+        @Schema(description = "UF da cidade", example = "MT", required = true)
         String cid_uf
 ) {
     public CidadeRequestDto {

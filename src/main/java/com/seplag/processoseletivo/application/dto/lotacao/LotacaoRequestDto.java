@@ -1,18 +1,31 @@
 package com.seplag.processoseletivo.application.dto.lotacao;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 
+@Schema(description = "DTO para requisição de lotação")
 public record LotacaoRequestDto(
-       Long pes_id,
-       Long uni_id,
-       @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")  LocalDate lot_data_lotacao,
-       @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy") LocalDate lot_data_remocao,
-       String lot_portaria
+        @Schema(description = "ID da pessoa", example = "1", required = true)
+        Long pes_id,
+
+        @Schema(description = "ID da unidade", example = "2", required = true)
+        Long uni_id,
+
+        @Schema(description = "Data de lotação", example = "2023-01-01", required = true)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        LocalDate lot_data_lotacao,
+
+        @Schema(description = "Data de remoção", example = "2023-12-31")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        LocalDate lot_data_remocao,
+
+        @Schema(description = "Portaria", example = "Portaria 123", required = true)
+        String lot_portaria
 ) {
 
-  public LotacaoRequestDto {
+    public LotacaoRequestDto {
         if (pes_id == null) {
             throw new IllegalArgumentException("Id da pessoa não pode ser nulo");
         }
@@ -25,6 +38,5 @@ public record LotacaoRequestDto(
         if (lot_portaria == null || lot_portaria.isBlank()) {
             throw new IllegalArgumentException("Portaria não pode ser nula ou vazia");
         }
-  }
-
+    }
 }

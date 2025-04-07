@@ -1,14 +1,23 @@
 package com.seplag.processoseletivo.application.dto.endereco;
 
-import com.seplag.processoseletivo.domain.model.Cidade;
 import com.seplag.processoseletivo.domain.model.Endereco;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "DTO para requisição de endereço")
 public record EnderecoRequestDto(
-
+        @Schema(description = "Tipo de logradouro", example = "Rua", required = true)
         String end_tipo_logradouro,
+
+        @Schema(description = "Logradouro", example = "Avenida Paulista", required = true)
         String end_logradouro,
+
+        @Schema(description = "Número", example = "123", required = true)
         Long end_numero,
+
+        @Schema(description = "Bairro", example = "Centro", required = true)
         String end_bairro,
+
+        @Schema(description = "ID da cidade", example = "1", required = true)
         Long cidade_id
 ) {
     public EnderecoRequestDto {

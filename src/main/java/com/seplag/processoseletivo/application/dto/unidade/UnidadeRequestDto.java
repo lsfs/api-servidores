@@ -1,11 +1,19 @@
 package com.seplag.processoseletivo.application.dto.unidade;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.Set;
 
+@Schema(description = "DTO para solicitação de unidade")
 public record UnidadeRequestDto(
+        @Schema(description = "Nome da unidade", example = "Departamento Financeiro", required = true)
         String unid_nome,
+
+        @Schema(description = "Sigla da unidade", example = "FIN", required = true)
         String unid_sigla,
+
+        @Schema(description = "Endereços da unidade", required = true)
         Set<Long> enderecos
 ) {
 

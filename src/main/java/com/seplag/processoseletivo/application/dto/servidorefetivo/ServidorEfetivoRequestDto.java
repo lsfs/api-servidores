@@ -1,17 +1,33 @@
 package com.seplag.processoseletivo.application.dto.servidorefetivo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 import java.util.Set;
 
+@Schema(description = "DTO para requisição de servidor efetivo")
 public record ServidorEfetivoRequestDto (
+        @Schema(description = "Nome do servidor efetivo", example = "João Silva", required = true)
         String servidorEfetivoNome,
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy") LocalDate servidorEfetivoDataNascimento,
+
+        @Schema(description = "Data de nascimento do servidor efetivo", example = "1990-01-01", required = true)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        LocalDate servidorEfetivoDataNascimento,
+
+        @Schema(description = "Sexo do servidor efetivo", example = "Masculino", required = true)
         String servidorEfetivoSexo,
+
+        @Schema(description = "Nome da mãe do servidor efetivo", example = "Maria Silva", required = true)
         String servidorEfetivoMae,
+
+        @Schema(description = "Nome do pai do servidor efetivo", example = "José Silva", required = true)
         String servidorEfetivoPai,
+
+        @Schema(description = "Matrícula do servidor efetivo", example = "123456", required = true)
         String servidorMatricula,
+
+        @Schema(description = "Endereços do servidor efetivo", required = true)
         Set<Long> servidorEfetivoEnderecos
 ) {
 
