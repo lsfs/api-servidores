@@ -58,7 +58,7 @@ Os containers que serão criados e suas respectivas urls para acesso são:
 
 ### PS: Certifique de que as portas não estão sendo utilizadas por outros serviços antes de executar o comando `docker-compose up -d`.
 
-## Acesso ao Swagger
+## Documentação da API (Swagger)
 
 A documentação da API pode ser acessada através do Swagger, disponível na seguinte URL:
 
@@ -67,7 +67,7 @@ http://localhost:8080/api/swagger-ui/index.html
 ```
 
 Ao executar o comando `docker-compose up -d`, e levantar os containers, o banco de dados será criado e 
-um usário padrão será inserido com os dados:
+um usário ADMIN padrão será inserido com os dados:
 
 **Usuário:** admin@email.com  
 **Senha:** 123456
@@ -78,8 +78,28 @@ O token deve ser adicionado no campo Authorize do Swagger, no topo da página.
 Ao realizar o login, também é gerado um token de Refresh, que pode ser utilizado para gerar um novo token de autenticação, caso o mesmo expire.
 Para isso, deve-se utilizar o endpoint `/auth/refresh`, passando o token de Refresh no corpo da requisição.
 
+#### Caso deseje criar outro usuário, deve-se utilizar o endpoint `/auth/cadastro`, passando os dados no corpo da requisição. O usuário criado será inserido com a permissão de ADMIN.
+
+#### Observação: O token de autenticação tem um tempo de expiração de 5 minutos, portanto pode ser que seja necessário gerar um novo token durante os testes
+
+## Recurso de Autorização
+
+ Além do usuário ADMIN padrão, foi criado mais um login com a permissão de USUARIO e seus dados são:
+
+**Usuário:** usuario@email.com  
+**Senha:** 123456
+
+Para testar os perfis do sistema, faça uma requisição para `auth/login` com os dados acima e utilize o token para se autenticar no Swagger.
+Depis pode-se enviar uma requisição para o endpoint `/admin` , que possui permissão apenas aos usuários ADMIN. Assim, não deve ser permitido
+para esse usuário conseguir acessar esse recurso. Com um token gerado para o usuário ADMIN (usuário padrão de email: admin@email.com), a requisição deve ser permitida.
+
+## Nginx
+
+O Nginx foi utilizado para fazer o proxy reverso, permitindo o acesso externo às imagens inseridas no Minio.
+O endereço `localhost:8081/minio` redireciona as requisições para `minio:9000` na rede interna do Docker, fazendo com que a assinatura dos arquivos não seja quebrada ao tentar acessá-los externamente.
 
 
+## ENDPOINTS CRIADOS
 
 ## Autenticação
 
