@@ -13,7 +13,8 @@ public class UsuarioMapper {
         return new Usuario(
                 usuarioEntity.getId(),
                 usuarioEntity.getEmail(),
-                usuarioEntity.getSenha()
+                usuarioEntity.getSenha(),
+                usuarioEntity.getRoles()
         );
     }
 
@@ -26,6 +27,7 @@ public class UsuarioMapper {
         usuarioEntity.setId(usuario.getId());
         usuarioEntity.setEmail(usuario.getEmail());
         usuarioEntity.setSenha(usuario.getSenha());
+        usuarioEntity.setRoles(usuario.getRoles());
 
         return usuarioEntity;
     }

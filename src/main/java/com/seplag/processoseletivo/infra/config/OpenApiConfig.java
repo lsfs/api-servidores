@@ -22,6 +22,7 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("Api - Processo Seletivo SEPLAG")
                         .description("Documentacao da API do Processo Seletivo SEPLAG"))
+                .addTagsItem(new Tag().name("Admin").description("Teste de permissão de acesso"))
                 .addTagsItem(new Tag().name("Autenticação").description("Endpoints de login, registro e refresh"))
                 .addTagsItem(new Tag().name("Cidade").description("Operações relacionadas a cidades"))
                 .addTagsItem(new Tag().name("Endereço").description("Operações relacionadas a endereços"))

@@ -1,5 +1,6 @@
 package com.seplag.processoseletivo.infra.security;
 
+import com.seplag.processoseletivo.domain.enums.Role;
 import com.seplag.processoseletivo.domain.model.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -32,6 +33,9 @@ public class JwtTokenProvider {
         return Jwts.builder()
                 .setSubject(usuario.getEmail())
                 .claim("email", usuario.getEmail())
+                .claim("roles", usuario.getRoles().stream()
+                        .map(Role::name)
+                        .toList())
                 .claim("type", "access")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + tokenValidadeTokenEmMs))

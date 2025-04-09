@@ -19,14 +19,14 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     public Usuario findByEmail(String email) {
         return usuarioJpaRepository.findByEmail(email)
                 .map(UsuarioMapper::toDomain)
-                .orElseThrow(() -> new EntityNotFoundException("Erro ao autenticar usuário"));
+                .orElseThrow(() -> new EntityNotFoundException("Usuário inexistente"));
     }
 
     @Override
     public Usuario findById(Long id) {
         return usuarioJpaRepository.findById(id)
                 .map(UsuarioMapper::toDomain)
-                .orElseThrow(() -> new EntityNotFoundException("Erro ao autenticar usuário"));
+                .orElseThrow(() -> new EntityNotFoundException("Usuário inexistente"));
     }
 
     @Override
