@@ -1,5 +1,6 @@
 package com.seplag.processoseletivo.application.controllers;
 
+import com.seplag.processoseletivo.application.dto.fotopessoa.FotoPessoaCreateResponseDto;
 import com.seplag.processoseletivo.application.dto.fotopessoa.FotoPessoaLinkResponse;
 import com.seplag.processoseletivo.application.dto.shared.MensagemRetorno;
 import com.seplag.processoseletivo.application.usecases.fotopessoa.BuscaFotoPorIdUseCase;
@@ -40,23 +41,23 @@ public class FotoPessoaController {
             @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content)
     })
     @PostMapping(value ="/{pessoaId}/foto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<MensagemRetorno> uploadFoto(
+    public ResponseEntity<FotoPessoaCreateResponseDto> uploadFoto(
         @Parameter(description = "ID da pessoa", required = true)
         @PathVariable Long pessoaId,
         @RequestParam("arquivos") List<MultipartFile> arquivos
     ) {
         Pessoa pessoa = new Pessoa(pessoaId);
-        uploadFotoPessoaUseCase.execute(pessoa, arquivos);
-        return new ResponseEntity<>(new MensagemRetorno("Arquivo enviado!"), HttpStatus.CREATED);
+        FotoPessoaCreateResponseDto response = uploadFotoPessoaUseCase.execute(pessoa, arquivos);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Gera um link para a foto de uma pessoa")
+    @Operation(summary = "Busca foto por id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Link gerado com sucesso",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = FotoPessoaLinkResponse.class))),
             @ApiResponse(responseCode = "404", description = "Foto não encontrada", content = @Content)
     })
-    @GetMapping("/{id}/link")
+    @GetMapping("/{id}")
     public ResponseEntity<FotoPessoaLinkResponse> gerarLinkFoto(@PathVariable Long id) {
         var response = buscaFotoPorIdUseCase.execute(id);
         return new ResponseEntity<>(new FotoPessoaLinkResponse(response), HttpStatus.OK);
