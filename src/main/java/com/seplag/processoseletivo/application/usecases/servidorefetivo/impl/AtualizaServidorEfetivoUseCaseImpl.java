@@ -8,6 +8,7 @@ import com.seplag.processoseletivo.domain.model.Pessoa;
 import com.seplag.processoseletivo.domain.model.ServidorEfetivo;
 import com.seplag.processoseletivo.domain.repositories.EnderecoRepository;
 import com.seplag.processoseletivo.domain.repositories.ServidorEfetivoRepository;
+import com.seplag.processoseletivo.infra.persistence.mapper.SexoMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -35,7 +36,7 @@ public class AtualizaServidorEfetivoUseCaseImpl implements AtualizarServidorEfet
         pessoa.setPes_data_nascimento(servidorEfetivoRequestDto.servidorEfetivoDataNascimento());
         pessoa.setPes_pai(servidorEfetivoRequestDto.servidorEfetivoPai());
         pessoa.setPes_mae(servidorEfetivoRequestDto.servidorEfetivoMae());
-        pessoa.setPes_sexo(servidorEfetivoRequestDto.servidorEfetivoSexo());
+        pessoa.setPes_sexo(SexoMapper.toSexo(servidorEfetivoRequestDto.servidorEfetivoSexo()));
 
         Set<Endereco> enderecos = buscarEnderecos(servidorEfetivoRequestDto.servidorEfetivoEnderecos());
         pessoa.setEnderecos(enderecos);

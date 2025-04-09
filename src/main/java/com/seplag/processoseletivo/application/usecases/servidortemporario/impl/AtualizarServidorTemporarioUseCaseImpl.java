@@ -8,6 +8,7 @@ import com.seplag.processoseletivo.domain.model.Pessoa;
 import com.seplag.processoseletivo.domain.model.ServidorTemporario;
 import com.seplag.processoseletivo.domain.repositories.EnderecoRepository;
 import com.seplag.processoseletivo.domain.repositories.ServidorTemporarioRepository;
+import com.seplag.processoseletivo.infra.persistence.mapper.SexoMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -35,7 +36,7 @@ public class AtualizarServidorTemporarioUseCaseImpl implements AtualizarServidor
         pessoa.setPes_data_nascimento(servidorTempRequestDto.servidorTempDataNascimento());
         pessoa.setPes_pai(servidorTempRequestDto.servidorTempPai());
         pessoa.setPes_mae(servidorTempRequestDto.servidorTempMae());
-        pessoa.setPes_sexo(servidorTempRequestDto.servidorTempSexo());
+        pessoa.setPes_sexo(SexoMapper.toSexo(servidorTempRequestDto.servidorTempSexo()));
 
         Set<Endereco> enderecos = buscarEnderecos(servidorTempRequestDto.servidorTempEnderecos());
         pessoa.setEnderecos(enderecos);

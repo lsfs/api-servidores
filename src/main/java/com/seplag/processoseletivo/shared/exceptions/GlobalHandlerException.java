@@ -28,6 +28,21 @@ public class GlobalHandlerException {
                 HttpStatus.NOT_FOUND
         );
     }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<MensagemErro> handleIllegalArgumentException(
+            IllegalArgumentException ex,
+            HttpServletRequest request
+    ) {
+        return new ResponseEntity<>(
+                new MensagemErro(
+                        HttpStatus.BAD_REQUEST.value(),
+                        "Argumento inválido",
+                        ex.getMessage(),
+                        request.getRequestURI()
+                ),
+                HttpStatus.BAD_REQUEST
+        );
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<MensagemErro> handleValidationExceptions(

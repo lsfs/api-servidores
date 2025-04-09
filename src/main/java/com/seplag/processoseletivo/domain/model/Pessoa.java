@@ -1,5 +1,7 @@
 package com.seplag.processoseletivo.domain.model;
 
+import com.seplag.processoseletivo.domain.enums.Sexo;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Date;
@@ -8,9 +10,9 @@ import java.util.Set;
 public class Pessoa {
 
     private Long pes_id;
-    private String pes_nome;
+    private  String pes_nome;
     private LocalDate pes_data_nascimento;
-    private String pes_sexo;
+    private Sexo pes_sexo;
     private String pes_mae;
     private String pes_pai;
     private Set<Endereco> pes_enderecos;
@@ -23,7 +25,7 @@ public class Pessoa {
         this.pes_id = id;
     }
 
-    public Pessoa(Long pes_id, String pes_nome, LocalDate pes_data_nascimento, String pes_sexo, String pes_mae, String pes_pai, Set<Endereco> pes_enderecos) {
+    public Pessoa(Long pes_id, String pes_nome, LocalDate pes_data_nascimento, Sexo pes_sexo, String pes_mae, String pes_pai, Set<Endereco> pes_enderecos) {
         this.pes_id = pes_id;
         this.pes_nome = pes_nome;
         this.pes_data_nascimento = pes_data_nascimento;
@@ -57,11 +59,11 @@ public class Pessoa {
         this.pes_data_nascimento = pes_data_nascimento;
     }
 
-    public String getPes_sexo() {
+    public Sexo getPes_sexo() {
         return pes_sexo;
     }
 
-    public void setPes_sexo(String pes_sexo) {
+    public void setPes_sexo(Sexo pes_sexo) {
         this.pes_sexo = pes_sexo;
     }
 

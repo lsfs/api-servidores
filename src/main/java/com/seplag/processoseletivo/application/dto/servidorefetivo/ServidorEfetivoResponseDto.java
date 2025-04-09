@@ -41,7 +41,7 @@ public record ServidorEfetivoResponseDto(
                 servidorEfetivo.getPessoa().getPes_id(),
                 servidorEfetivo.getPessoa().getPes_nome(),
                 servidorEfetivo.getPessoa().getPes_data_nascimento(),
-                servidorEfetivo.getPessoa().getPes_sexo(),
+                servidorEfetivo.getPessoa().getPes_sexo().name(),
                 servidorEfetivo.getPessoa().getPes_mae(),
                 servidorEfetivo.getPessoa().getPes_pai(),
                 servidorEfetivo.getSe_matricula(),

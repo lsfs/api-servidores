@@ -4,6 +4,7 @@ import com.seplag.processoseletivo.application.dto.endereco.EnderecoRequestDto;
 import com.seplag.processoseletivo.application.dto.servidortemporario.ServidorTempRequestDto;
 import com.seplag.processoseletivo.application.dto.servidortemporario.ServidorTempResponseDto;
 import com.seplag.processoseletivo.application.usecases.servidortemporario.CriarServidorTempUseCase;
+import com.seplag.processoseletivo.domain.enums.Sexo;
 import com.seplag.processoseletivo.domain.model.Cidade;
 import com.seplag.processoseletivo.domain.model.Endereco;
 import com.seplag.processoseletivo.domain.model.Pessoa;
@@ -11,6 +12,7 @@ import com.seplag.processoseletivo.domain.model.ServidorTemporario;
 import com.seplag.processoseletivo.domain.repositories.CidadeRepository;
 import com.seplag.processoseletivo.domain.repositories.EnderecoRepository;
 import com.seplag.processoseletivo.domain.repositories.ServidorTemporarioRepository;
+import com.seplag.processoseletivo.infra.persistence.mapper.SexoMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -45,7 +47,7 @@ public class CriarServidorTempUseCaseImpl implements CriarServidorTempUseCase {
         Pessoa pessoa = new Pessoa();
         pessoa.setPes_nome(servidorTempRequestDto.servidorTempNome());
         pessoa.setPes_data_nascimento(servidorTempRequestDto.servidorTempDataNascimento());
-        pessoa.setPes_sexo(servidorTempRequestDto.servidorTempSexo());
+        pessoa.setPes_sexo(SexoMapper.toSexo(servidorTempRequestDto.servidorTempSexo()));
         pessoa.setPes_mae(servidorTempRequestDto.servidorTempMae());
         pessoa.setPes_pai(servidorTempRequestDto.servidorTempPai());
 

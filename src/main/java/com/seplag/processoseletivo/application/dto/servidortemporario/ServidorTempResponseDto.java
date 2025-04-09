@@ -50,7 +50,7 @@ public record ServidorTempResponseDto(
                 servidorTemporario.getPessoa().getPes_id(),
                 servidorTemporario.getPessoa().getPes_nome(),
                 servidorTemporario.getPessoa().getPes_data_nascimento(),
-                servidorTemporario.getPessoa().getPes_sexo(),
+                servidorTemporario.getPessoa().getPes_sexo().name(),
                 servidorTemporario.getPessoa().getPes_mae(),
                 servidorTemporario.getPessoa().getPes_pai(),
                 servidorTemporario.getSt_data_admissao(),

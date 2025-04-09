@@ -33,7 +33,7 @@ public record PessoaResponseDto (
                 pessoa.getPes_id(),
                 pessoa.getPes_nome(),
                 pessoa.getPes_data_nascimento(),
-                pessoa.getPes_sexo(),
+                pessoa.getPes_sexo().name(),
                 pessoa.getPes_mae(),
                 pessoa.getPes_pai()
         );

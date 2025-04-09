@@ -12,6 +12,7 @@ import com.seplag.processoseletivo.domain.model.ServidorEfetivo;
 import com.seplag.processoseletivo.domain.repositories.CidadeRepository;
 import com.seplag.processoseletivo.domain.repositories.EnderecoRepository;
 import com.seplag.processoseletivo.domain.repositories.ServidorEfetivoRepository;
+import com.seplag.processoseletivo.infra.persistence.mapper.SexoMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,7 +46,7 @@ public class CriarServidorEfetivoUseCaseImpl implements CriarServidorEfetivoUseC
         Pessoa pessoa = new Pessoa();
         pessoa.setPes_nome(requestDto.servidorEfetivoNome());
         pessoa.setPes_data_nascimento(requestDto.servidorEfetivoDataNascimento());
-        pessoa.setPes_sexo(requestDto.servidorEfetivoSexo());
+        pessoa.setPes_sexo(SexoMapper.toSexo(requestDto.servidorEfetivoSexo()));
         pessoa.setPes_mae(requestDto.servidorEfetivoMae());
         pessoa.setPes_pai(requestDto.servidorEfetivoPai());
 
