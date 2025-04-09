@@ -25,6 +25,15 @@ O projeto foi desenvolvido utilizando arquitetura limpa para facilitar a manuten
 
 Como pré-requisitos, é necessário ter o Docker e o Docker Compose instalados na máquina.
 
+Depois, pode-se clonar o repositório com 
+
+```
+git clone https://github.com/lsfs/api-servidores.git
+```
+Após isso, entrar na pasta com
+``` 
+cd api-servidores
+```
 
 Após a clonagem do repositório, dentro da pasta do projeto, pelo terminal, deve-se executar o seguinte comando para buildar o projeto:
 
