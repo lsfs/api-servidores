@@ -48,15 +48,34 @@ docker-compose up -d
 ```
 Os containers que serão criados e suas respectivas urls para acesso são:
 
-| Container                 | Porta                 |
-|---------------------------|-----------------------|
-| Api                       | localhost:8080/api    |
-| PostgreSql | localhost:5432/api_db |
-| Minio                     | localhost:9000        |
-| Nginx                     | localhost:8081        |
-| Minio Console             | localhost:9001        |
+| Container                   | Porta                 |
+|-----------------------------|-----------------------|
+| Api                         | localhost:8080/api    |
+| Banco de dados (Postgresql) | localhost:5432/api_db |
+| Minio                       | localhost:9000        |
+| Nginx                       | localhost:8081        |
+| Minio Console               | localhost:9001        |
 
 ### PS: Certifique de que as portas não estão sendo utilizadas por outros serviços antes de executar o comando `docker-compose up -d`.
+
+## Acesso ao minio
+
+Para acessar o console do MiniO, vá até `http://localhost:9001` e faça login com as credenciais:
+```
+    Usário: minioadmin
+    Senha: minioadmin
+```
+O bucket `pessoas` será usado para armazenar as imagens enviadas.
+
+
+## Banco de dados
+
+O banco de dados utilizado é o PostgreSQL, e a imagem utilizada é a `postgres:latest`.
+O banco de dados será criado com o nome `api_db`, e o usuário e senha padrão são `postgres` e `postgres`, respectivamente.
+
+
+
+
 
 ## Documentação da API (Swagger)
 
