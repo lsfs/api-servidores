@@ -2,6 +2,7 @@ package com.seplag.processoseletivo.application.controllers;
 
 import com.seplag.processoseletivo.application.dto.autenticacao.LoginRequestDto;
 import com.seplag.processoseletivo.application.dto.autenticacao.LoginResponseDto;
+import com.seplag.processoseletivo.application.dto.autenticacao.RefreshTokenRequestDto;
 import com.seplag.processoseletivo.application.dto.autenticacao.UsuarioRequestDto;
 import com.seplag.processoseletivo.application.dto.shared.MensagemRetorno;
 import com.seplag.processoseletivo.application.usecases.autenticacao.AutenticaUsuarioUseCase;
@@ -54,8 +55,8 @@ public class AuthController {
             @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content)
     })
     @PostMapping("/refresh")
-    public ResponseEntity<LoginResponseDto> refreshToken(@RequestBody String refreshToken) {
-        LoginResponseDto response = refreshTokenUseCase.execute(refreshToken);
+    public ResponseEntity<LoginResponseDto> refreshToken(@Valid @RequestBody RefreshTokenRequestDto refreshToken) {
+        LoginResponseDto response = refreshTokenUseCase.execute(refreshToken.token());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
