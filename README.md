@@ -133,7 +133,7 @@ O endereço `localhost:8081/minio` redireciona as requisições para `minio:9000
 - `GET /unidades/{id}` – Busca unidade por ID
 - `PUT /unidades/{id}` – Atualiza uma unidade
 - `DELETE /unidades/{id}` – Deleta uma unidade
-- `GET /unidades/endereco` – Busca endereços por nome do servidor
+- `GET /unidades/endereco` – Busca endereços por nome do servidor efetivo
 
 ## Servidor Efetivo
 
