@@ -22,6 +22,10 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     @Override
     public Cidade criar(Cidade cidade) {
 
+        if (existsByNomeAndUf(cidade.getCid_nome(), cidade.getCid_uf())) {
+            throw new IllegalArgumentException("Cidade já cadastrada");
+        }
+
         CidadeEntity cidadeEntity = new CidadeEntity();
         cidadeEntity.setCid_nome(cidade.getCid_nome());
         cidadeEntity.setCid_uf(cidade.getCid_uf());
@@ -29,6 +33,10 @@ public class CidadeRepositoryImpl implements CidadeRepository {
         CidadeEntity cidadeSalva = cidadeJpaRepository.save(cidadeEntity);
         return CidadeMapper.toModel(cidadeSalva);
 
+    }
+
+    private boolean existsByNomeAndUf(String nome, String uf) {
+        return cidadeJpaRepository.existsByCidNomeAndCidUf(nome, uf);
     }
 
     @Override
