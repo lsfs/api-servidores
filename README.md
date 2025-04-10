@@ -120,9 +120,10 @@ O endereço `localhost:8081/minio` redireciona as requisições para `minio:9000
 
 ## ENDPOINTS CRIADOS
 
-## As entidades de Servidor Efetivo e Servidor Temporário compartilham o ID com a entidade Pessoa, portanto, ao criar um servidor efetivo ou temporário, é criada uma entidade Pessoa com os dados enviados, e o ID gerado para essa entidade representa o ID para as entidades de Servidor Efetivo e Servidor Temporário.
-## Sendo assim, ao realizar alguma operação que necessite do id do servidor, deve-se utilizar o id da entidade Pessoa, que é o mesmo id do servidor efetivo ou temporário.
-## Por exemplo, no endpont `/foto-pessoa/{pessoaId}/foto` deve-se passar o id da entidade Pessoa que compoe o servidor efetivo ou temporário.
+#### Considerações:
+#### As entidades de Servidor Efetivo e Servidor Temporário compartilham o ID com a entidade Pessoa, portanto, ao criar um servidor efetivo ou temporário, é criada uma entidade Pessoa com os dados enviados, e o ID gerado para essa entidade representa o ID para as entidades de Servidor Efetivo e Servidor Temporário.
+#### Sendo assim, ao realizar alguma operação que necessite do id do servidor, deve-se utilizar o id da entidade Pessoa, que é o mesmo id do servidor efetivo ou temporário.
+#### Por exemplo, no endpont `/foto-pessoa/{pessoaId}/foto` deve-se passar o id da entidade Pessoa que compoe o servidor efetivo ou temporário.
 
 ## Autenticação
 
